@@ -10,42 +10,54 @@ const motionProps = {
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children, ...props }) => (
-      <motion.h1
-        className="text-4xl font-bold mb-6 gradient-text"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.h1>
-    ),
-    h2: ({ children, ...props }) => (
-      <motion.h2
-        className="text-3xl font-semibold mb-4 mt-8"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.h2>
-    ),
-    h3: ({ children, ...props }) => (
-      <motion.h3
-        className="text-2xl font-semibold mb-3 mt-6"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.h3>
-    ),
-    p: ({ children, ...props }) => (
-      <motion.p
-        className="mb-4 leading-relaxed text-muted-foreground"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.p>
-    ),
+    h1: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.h1
+          className={`text-4xl font-bold mb-6 gradient-text ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.h1>
+      )
+    },
+    h2: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.h2
+          className={`text-3xl font-semibold mb-4 mt-8 ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.h2>
+      )
+    },
+    h3: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.h3
+          className={`text-2xl font-semibold mb-3 mt-6 ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.h3>
+      )
+    },
+    p: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.p
+          className={`mb-4 leading-relaxed text-muted-foreground ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.p>
+      )
+    },
     a: ({ children, ...props }) => (
       <a
         className="text-primary hover:underline font-medium"
@@ -62,47 +74,59 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </code>
     ),
-    pre: ({ children, ...props }) => (
-      <motion.pre
-        className="bg-muted p-4 rounded-lg overflow-x-auto mb-4"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.pre>
-    ),
-    ul: ({ children, ...props }) => (
-      <motion.ul
-        className="list-disc list-inside mb-4 space-y-2"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.ul>
-    ),
-    ol: ({ children, ...props }) => (
-      <motion.ol
-        className="list-decimal list-inside mb-4 space-y-2"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.ol>
-    ),
+    pre: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.pre
+          className={`bg-muted p-4 rounded-lg overflow-x-auto mb-4 ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.pre>
+      )
+    },
+    ul: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.ul
+          className={`list-disc list-inside mb-4 space-y-2 ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.ul>
+      )
+    },
+    ol: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.ol
+          className={`list-decimal list-inside mb-4 space-y-2 ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.ol>
+      )
+    },
     li: ({ children, ...props }) => (
       <li className="text-muted-foreground" {...props}>
         {children}
       </li>
     ),
-    blockquote: ({ children, ...props }) => (
-      <motion.blockquote
-        className="border-l-4 border-primary pl-4 italic text-muted-foreground mb-4"
-        {...motionProps}
-        {...props}
-      >
-        {children}
-      </motion.blockquote>
-    ),
+    blockquote: ({ children, ...props }) => {
+      const { className, ...restProps } = props
+      return (
+        <motion.blockquote
+          className={`border-l-4 border-primary pl-4 italic text-muted-foreground mb-4 ${className || ''}`}
+          {...motionProps}
+          {...restProps}
+        >
+          {children}
+        </motion.blockquote>
+      )
+    },
     ...components,
   }
 }
