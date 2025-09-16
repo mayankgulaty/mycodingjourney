@@ -21,11 +21,13 @@ export function ScrollProgress() {
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 z-50 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500"
-      style={{ scaleX: scrollProgress / 100 }}
+      style={{ 
+        scaleX: scrollProgress / 100,
+        transformOrigin: "left"
+      }}
       initial={{ scaleX: 0 }}
       animate={{ scaleX: scrollProgress / 100 }}
       transition={{ duration: 0.1 }}
-      transformOrigin="left"
     />
   )
 }
