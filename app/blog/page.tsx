@@ -81,7 +81,7 @@ export default function BlogPage() {
               <div className="text-6xl mb-4">📝</div>
               <h3 className="text-2xl font-semibold mb-4">No posts yet</h3>
               <p className="text-muted-foreground">
-                I'm working on some great content. Check back soon!
+                I&apos;m working on some great content. Check back soon!
               </p>
             </motion.div>
           ) : (

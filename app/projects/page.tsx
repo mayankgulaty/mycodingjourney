@@ -104,7 +104,7 @@ export default function ProjectsPage() {
               className="text-xl md:text-2xl text-muted-foreground mb-8"
               variants={fadeInUp}
             >
-              A collection of projects I've built to solve real-world problems and explore new technologies.
+              A collection of projects I&apos;ve built to solve real-world problems and explore new technologies.
             </motion.p>
           </motion.div>
         </div>
@@ -287,8 +287,8 @@ export default function ProjectsPage() {
           >
             <h2 className="text-4xl font-bold mb-6">Interested in Working Together?</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              I'm always excited to work on new projects and collaborate with amazing people. 
-              Let's discuss how we can bring your ideas to life.
+              I&apos;m always excited to work on new projects and collaborate with amazing people. 
+              Let&apos;s discuss how we can bring your ideas to life.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

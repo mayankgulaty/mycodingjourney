@@ -86,7 +86,7 @@ export default function ContactPage() {
               className="text-xl md:text-2xl text-muted-foreground mb-8"
               variants={fadeInUp}
             >
-              Let's work together to bring your ideas to life
+              Let&apos;s work together to bring your ideas to life
             </motion.p>
           </motion.div>
         </div>
@@ -166,7 +166,7 @@ export default function ContactPage() {
                   
                   {submitStatus === 'success' && (
                     <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200">
-                      Message sent successfully! I'll get back to you soon.
+                      Message sent successfully! I&apos;ll get back to you soon.
                     </div>
                   )}
                   
@@ -182,11 +182,11 @@ export default function ContactPage() {
             {/* Contact Info */}
             <motion.div variants={fadeInUp} className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-6">Let's connect</h2>
+                <h2 className="text-2xl font-bold mb-6">Let&apos;s connect</h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  I'm always excited to work on new projects and collaborate with amazing people. 
+                  I&apos;m always excited to work on new projects and collaborate with amazing people. 
                   Whether you have a specific project in mind or just want to chat about technology, 
-                  I'd love to hear from you.
+                  I&apos;d love to hear from you.
                 </p>
               </div>
 

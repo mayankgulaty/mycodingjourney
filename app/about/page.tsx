@@ -76,9 +76,9 @@ export default function AboutPage() {
                 {siteConfig.author.bio}
               </p>
               <p className="text-lg text-muted-foreground mb-8">
-                I'm passionate about creating digital experiences that are not only functional 
+                I&apos;m passionate about creating digital experiences that are not only functional 
                 but also beautiful and intuitive. With over 5 years of experience in web development, 
-                I've had the opportunity to work with amazing teams and build products that impact 
+                I&apos;ve had the opportunity to work with amazing teams and build products that impact 
                 thousands of users.
               </p>
               <div className="flex flex-wrap gap-2">
