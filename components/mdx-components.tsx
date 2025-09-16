@@ -11,7 +11,7 @@ const motionProps = {
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.h1
           className={`text-4xl font-bold mb-6 gradient-text ${className || ''}`}
@@ -23,7 +23,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     h2: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.h2
           className={`text-3xl font-semibold mb-4 mt-8 ${className || ''}`}
@@ -35,7 +35,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     h3: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.h3
           className={`text-2xl font-semibold mb-3 mt-6 ${className || ''}`}
@@ -47,7 +47,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     p: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.p
           className={`mb-4 leading-relaxed text-muted-foreground ${className || ''}`}
@@ -75,7 +75,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </code>
     ),
     pre: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.pre
           className={`bg-muted p-4 rounded-lg overflow-x-auto mb-4 ${className || ''}`}
@@ -87,7 +87,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     ul: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.ul
           className={`list-disc list-inside mb-4 space-y-2 ${className || ''}`}
@@ -99,7 +99,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     ol: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.ol
           className={`list-decimal list-inside mb-4 space-y-2 ${className || ''}`}
@@ -116,7 +116,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </li>
     ),
     blockquote: ({ children, ...props }) => {
-      const { className, ...restProps } = props
+      const { className, onAnimationStart, onAnimationEnd, onAnimationIteration, ...restProps } = props
       return (
         <motion.blockquote
           className={`border-l-4 border-primary pl-4 italic text-muted-foreground mb-4 ${className || ''}`}
