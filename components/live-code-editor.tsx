@@ -180,7 +180,7 @@ export function LiveCodeEditor() {
           Live Code Editor
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Try out real data engineering code examples. Click "Run Code" to see the results!
+          Try out real data engineering code examples. Click &quot;Run Code&quot; to see the results!
         </p>
       </div>
 

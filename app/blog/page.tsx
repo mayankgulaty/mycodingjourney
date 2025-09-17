@@ -151,7 +151,7 @@ export default function BlogPage() {
                   Next.js 14: The Complete Guide to App Router
                 </h3>
                 <p className="text-foreground/70 mb-4 text-sm leading-relaxed">
-                  A comprehensive guide to Next.js 14's App Router, covering everything from basic routing to advanced patterns, server components, and performance optimization.
+                  A comprehensive guide to Next.js 14&apos;s App Router, covering everything from basic routing to advanced patterns, server components, and performance optimization.
                 </p>
                 <div className="flex items-center justify-between text-sm text-foreground/60">
                   <span>Dec 10, 2024</span>

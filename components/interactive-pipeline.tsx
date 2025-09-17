@@ -168,7 +168,7 @@ export function InteractivePipeline() {
           Interactive Data Pipeline
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Click "Run Pipeline" to see how data flows through my ETL process
+          Click &quot;Run Pipeline&quot; to see how data flows through my ETL process
         </p>
         
         <div className="flex justify-center gap-4 mb-8">
