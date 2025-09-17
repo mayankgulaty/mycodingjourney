@@ -4,6 +4,7 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { LoadingScreen } from '@/components/loading-screen'
 import { FloatingActionButton } from '@/components/floating-action-button'
+import { InteractiveCursor } from '@/components/interactive-cursor'
 import { siteConfig } from '@/lib/site'
 import './globals.css'
 
@@ -64,8 +65,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} gradient-bg min-h-screen`}>
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" />
+      </head>
+      <body className={`${inter.className} bg-background text-foreground min-h-screen`}>
         <LoadingScreen />
+        <InteractiveCursor />
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1 pt-16">

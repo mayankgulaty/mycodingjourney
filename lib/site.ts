@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "mycodingjourney",
   title: "My Coding Journey",
-  description: "A personal website showcasing my coding journey, projects, and thoughts.",
+  description: "A personal website showcasing my data engineering and full-stack development journey, projects, and thoughts.",
   url: "https://mycodingjourney.com",
   ogImage: "https://mycodingjourney.com/og-image.png",
   links: {
@@ -12,7 +12,7 @@ export const siteConfig = {
   author: {
     name: "Mayank",
     email: "hello@mycodingjourney.com",
-    bio: "Full-stack developer passionate about creating amazing web experiences.",
+    bio: "Data Engineer and Full-stack developer passionate about creating amazing web experiences and building robust data pipelines.",
     avatar: "/avatar.jpg",
   },
 } as const

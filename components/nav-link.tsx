@@ -19,8 +19,8 @@ export function NavLink({ href, children, className }: NavLinkProps) {
     <Link
       href={href}
       className={cn(
-        'nav-link text-white/80 hover:text-white',
-        isActive && 'active text-white',
+        'nav-link text-foreground/80 hover:text-foreground',
+        isActive && 'active text-foreground',
         className
       )}
     >

@@ -60,7 +60,7 @@ export function FloatingActionButton() {
                   >
                     <Link
                       href="/contact"
-                      className="flex items-center justify-center w-12 h-12 glass-morphism rounded-full text-white hover:neon-glow transition-all duration-300"
+                      className="flex items-center justify-center w-12 h-12 glass-morphism rounded-full text-foreground hover:neon-glow transition-all duration-300"
                       title="Contact"
                     >
                       💬
@@ -73,7 +73,7 @@ export function FloatingActionButton() {
                   >
                     <Link
                       href="/projects"
-                      className="flex items-center justify-center w-12 h-12 glass-morphism rounded-full text-white hover:neon-glow transition-all duration-300"
+                      className="flex items-center justify-center w-12 h-12 glass-morphism rounded-full text-foreground hover:neon-glow transition-all duration-300"
                       title="Projects"
                     >
                       🚀
@@ -86,7 +86,7 @@ export function FloatingActionButton() {
                   >
                     <Link
                       href="/blog"
-                      className="flex items-center justify-center w-12 h-12 glass-morphism rounded-full text-white hover:neon-glow transition-all duration-300"
+                      className="flex items-center justify-center w-12 h-12 glass-morphism rounded-full text-foreground hover:neon-glow transition-all duration-300"
                       title="Blog"
                     >
                       📝
@@ -101,7 +101,7 @@ export function FloatingActionButton() {
               onClick={() => isExpanded ? setIsExpanded(false) : scrollToTop()}
               onMouseEnter={() => setIsExpanded(true)}
               onMouseLeave={() => setIsExpanded(false)}
-              className="flex items-center justify-center w-14 h-14 glass-morphism rounded-full text-white hover:neon-glow transition-all duration-300 shadow-2xl"
+              className="flex items-center justify-center w-14 h-14 glass-morphism rounded-full text-foreground hover:neon-glow transition-all duration-300 shadow-2xl"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               title={isExpanded ? "Close Menu" : "Scroll to Top"}

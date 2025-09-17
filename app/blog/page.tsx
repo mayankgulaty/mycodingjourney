@@ -43,7 +43,7 @@ export default function BlogPage() {
               className="text-5xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white"
               variants={fadeInUp}
             >
-              My{' '}
+              My&apos;{' '}
               <span className="text-shimmer">Blog</span>
             </motion.h1>
             

@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { Logo } from './logo'
+import { ProfilePhoto } from './profile-photo'
 import { siteConfig } from '@/lib/site'
 
 export function Footer() {
@@ -20,8 +22,10 @@ export function Footer() {
           <div className="md:col-span-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="mb-4"
+              className="mb-4 flex items-center space-x-3"
             >
+              <ProfilePhoto size="md" animated={false} showBorder={false} />
+              <Logo size="lg" />
               <Link
                 href="/"
                 className="text-2xl font-bold gradient-text"

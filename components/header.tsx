@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { NavLink } from './nav-link'
 import { ThemeToggle } from './theme-toggle'
+import { Logo } from './logo'
+import { ProfilePhoto } from './profile-photo'
 import { siteConfig } from '@/lib/site'
 
 export function Header() {
@@ -34,7 +36,7 @@ export function Header() {
     <motion.header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         mounted && isScrolled
-          ? 'glass-morphism border-b border-white/20'
+          ? 'glass-morphism border-b border-border'
           : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
@@ -46,7 +48,10 @@ export function Header() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="flex items-center space-x-3"
           >
+            <ProfilePhoto size="sm" animated={false} showBorder={false} />
+            <Logo size="md" animated />
             <Link
               href="/"
               className="text-2xl font-bold text-shimmer"
@@ -66,7 +71,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
             <motion.button
-              className="md:hidden text-white"
+              className="md:hidden text-foreground"
               whileTap={{ scale: 0.95 }}
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
@@ -107,41 +112,41 @@ export function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="md:hidden glass-morphism border-t border-white/20"
+              className="md:hidden glass-morphism border-t border-border"
             >
               <div className="container py-4">
                 <nav className="flex flex-col space-y-4">
                   <Link
                     href="/"
-                    className="text-white/80 hover:text-white transition-colors py-2"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
                     onClick={closeMobileMenu}
                   >
                     Home
                   </Link>
                   <Link
                     href="/about"
-                    className="text-white/80 hover:text-white transition-colors py-2"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
                     onClick={closeMobileMenu}
                   >
                     About
                   </Link>
                   <Link
                     href="/projects"
-                    className="text-white/80 hover:text-white transition-colors py-2"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
                     onClick={closeMobileMenu}
                   >
                     Projects
                   </Link>
                   <Link
                     href="/blog"
-                    className="text-white/80 hover:text-white transition-colors py-2"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
                     onClick={closeMobileMenu}
                   >
                     Blog
                   </Link>
                   <Link
                     href="/contact"
-                    className="text-white/80 hover:text-white transition-colors py-2"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
                     onClick={closeMobileMenu}
                   >
                     Contact
