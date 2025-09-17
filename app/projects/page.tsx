@@ -5,6 +5,11 @@ import Link from 'next/link'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
+import { ProjectFilter } from '@/components/project-filter'
+import { InteractivePipeline } from '@/components/interactive-pipeline'
+import { LiveCodeEditor } from '@/components/live-code-editor'
+import { DataVisualization } from '@/components/data-visualization'
+import { FloatingParticles } from '@/components/enhanced-animations'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -24,178 +29,262 @@ const stagger = {
 }
 
 export default function ProjectsPage() {
-  const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with user authentication, payment processing, inventory management, and admin dashboard. Built with modern web technologies and deployed on Vercel.',
-      image: '/project-ecommerce.jpg',
-      tech: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Prisma', 'Tailwind CSS'],
-      liveUrl: 'https://ecommerce-demo.vercel.app',
-      githubUrl: 'https://github.com/username/ecommerce-platform',
-      featured: true
-    },
-    {
-      title: 'Task Management App',
-      description: 'A collaborative task management tool with real-time updates, team features, and project tracking. Includes drag-and-drop functionality and advanced filtering options.',
-      image: '/project-tasks.jpg',
-      tech: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express', 'Material-UI'],
-      liveUrl: 'https://taskmanager-demo.vercel.app',
-      githubUrl: 'https://github.com/username/task-manager',
-      featured: true
-    },
-    {
-      title: 'Weather Dashboard',
-      description: 'A beautiful weather dashboard with location-based forecasts, data visualization, and weather alerts. Features interactive charts and responsive design.',
-      image: '/project-weather.jpg',
-      tech: ['Vue.js', 'Chart.js', 'OpenWeather API', 'Vite', 'CSS3'],
-      liveUrl: 'https://weather-dashboard.vercel.app',
-      githubUrl: 'https://github.com/username/weather-dashboard',
-      featured: false
-    },
-    {
-      title: 'Blog CMS',
-      description: 'A headless CMS for managing blog content with MDX support, SEO optimization, and content scheduling. Built for developers who want to focus on writing.',
-      image: '/project-blog.jpg',
-      tech: ['Next.js', 'MDX', 'Sanity', 'TypeScript', 'Framer Motion'],
-      liveUrl: 'https://blog-cms.vercel.app',
-      githubUrl: 'https://github.com/username/blog-cms',
-      featured: false
-    },
-    {
-      title: 'Portfolio Website',
-      description: 'A modern portfolio website with smooth animations, dark mode, and responsive design. Showcases projects, skills, and blog posts with a clean interface.',
-      image: '/project-portfolio.jpg',
-      tech: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'TypeScript', 'next-themes'],
-      liveUrl: 'https://mycodingjourney.com',
-      githubUrl: 'https://github.com/username/portfolio',
-      featured: false
-    },
-    {
-      title: 'API Documentation Tool',
-      description: 'An interactive API documentation tool with live testing capabilities, code examples, and team collaboration features. Built for developer teams.',
-      image: '/project-api-docs.jpg',
-      tech: ['React', 'FastAPI', 'PostgreSQL', 'Docker', 'Swagger'],
-      liveUrl: 'https://api-docs-demo.vercel.app',
-      githubUrl: 'https://github.com/username/api-docs-tool',
-      featured: false
-    }
-  ]
-
-  const featuredProjects = projects.filter(project => project.featured)
-  const otherProjects = projects.filter(project => !project.featured)
-
   return (
     <>
       {/* Hero Section */}
-      <Section className="min-h-screen flex items-center">
-        <div className="container">
-          <motion.div
-            className="text-center max-w-4xl mx-auto"
-            initial="initial"
-            animate="animate"
-            variants={stagger}
-          >
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6"
-              variants={fadeInUp}
+      <Section className="min-h-[80vh] flex items-center relative overflow-hidden gradient-bg">
+        <FloatingParticles />
+        <div className="container relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-6 text-foreground"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
               My{' '}
-              <span className="gradient-text">Projects</span>
+              <span className="text-shimmer">Projects</span>
             </motion.h1>
             
-            <motion.p
-              className="text-xl md:text-2xl text-muted-foreground mb-8"
-              variants={fadeInUp}
+            <motion.p 
+              className="text-xl md:text-2xl text-foreground/80 mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               A collection of projects I&apos;ve built to solve real-world problems and explore new technologies.
             </motion.p>
+
+            {/* Interactive Stats */}
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {[
+                { number: '15+', label: 'Projects Built' },
+                { number: '5+', label: 'Technologies' },
+                { number: '3+', label: 'Years Experience' },
+                { number: '100%', label: 'Passion' }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center p-4 glass-morphism rounded-2xl"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
+                  <div className="text-sm text-foreground/70">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Featured Projects Showcase */}
+      <Section className="relative bg-background">
+        <div className="container">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+              Featured{' '}
+              <span className="text-shimmer">Projects</span>
+            </h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+              Here are some of my most impactful projects that showcase my skills and passion for innovation.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {/* Data Pipeline Project */}
+            <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105">
+              <div className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
+                    ⚡
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground">Real-time Data Pipeline</h3>
+                    <p className="text-foreground/60">Apache Kafka + Spark + PostgreSQL</p>
+                  </div>
+                </div>
+                <p className="text-foreground/80 mb-6 leading-relaxed">
+                  Built a scalable real-time data processing pipeline that handles 1M+ events per day, 
+                  featuring automatic scaling, monitoring, and data quality checks.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {['Apache Kafka', 'Apache Spark', 'PostgreSQL', 'Docker', 'Kubernetes', 'Python'].map((tech) => (
+                    <Badge key={tech} variant="outline" className="text-xs border-gray-300 text-gray-700 dark:border-white/30 dark:text-white/80">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <Link
+                    href="#"
+                    className="inline-flex items-center text-primary hover:text-primary/80 font-medium group-hover:translate-x-2 transition-all duration-300"
+                  >
+                    View Details
+                    <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </Link>
+                  <div className="text-sm text-foreground/60">2024</div>
+                </div>
+              </div>
+            </Card>
+
+            {/* AI/ML Project */}
+            <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105">
+              <div className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
+                    🤖
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground">ML Model Deployment Platform</h3>
+                    <p className="text-foreground/60">FastAPI + TensorFlow + AWS</p>
+                  </div>
+                </div>
+                <p className="text-foreground/80 mb-6 leading-relaxed">
+                  Developed an end-to-end ML platform for model training, deployment, and monitoring 
+                  with automated A/B testing and model versioning capabilities.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {['Python', 'FastAPI', 'TensorFlow', 'AWS Sagemaker', 'Docker', 'React'].map((tech) => (
+                    <Badge key={tech} variant="outline" className="text-xs border-gray-300 text-gray-700 dark:border-white/30 dark:text-white/80">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <Link
+                    href="#"
+                    className="inline-flex items-center text-primary hover:text-primary/80 font-medium group-hover:translate-x-2 transition-all duration-300"
+                  >
+                    View Details
+                    <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </Link>
+                  <div className="text-sm text-foreground/60">2024</div>
+                </div>
+              </div>
+            </Card>
           </motion.div>
         </div>
       </Section>
 
-      {/* Featured Projects */}
-      <Section className="bg-muted/50">
+      {/* Interactive Data Pipeline Demo */}
+      <Section className="relative bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20">
+        <InteractivePipeline />
+      </Section>
+
+      {/* Live Code Editor Demo */}
+      <Section className="relative bg-background">
+        <LiveCodeEditor />
+      </Section>
+
+      {/* Data Visualization Showcase */}
+      <Section className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
         <div className="container">
           <motion.div
-            className="text-center mb-16"
-            initial="initial"
-            whileInView="animate"
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            variants={fadeInUp}
           >
-            <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-            <p className="text-lg text-muted-foreground">
-              My most significant and impactful projects
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+              Data{' '}
+              <span className="text-shimmer">Visualization</span>
+            </h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+              Interactive data visualizations and analytics dashboards I&apos;ve created.
             </p>
           </motion.div>
           
           <motion.div
-            className="space-y-16"
-            initial="initial"
-            whileInView="animate"
+            className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            variants={stagger}
           >
-            {featuredProjects.map((project, index) => (
+            <DataVisualization />
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Skills & Technologies */}
+      <Section className="relative bg-background">
+        <div className="container">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+              Skills &{' '}
+              <span className="text-shimmer">Technologies</span>
+            </h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+              Technologies and tools I use to build amazing projects and solve complex problems.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {[
+              { name: 'Python', icon: '🐍', color: 'from-yellow-500 to-orange-500' },
+              { name: 'React', icon: '⚛️', color: 'from-blue-500 to-cyan-500' },
+              { name: 'Next.js', icon: '▲', color: 'from-gray-800 to-gray-900' },
+              { name: 'TypeScript', icon: '📘', color: 'from-blue-600 to-blue-800' },
+              { name: 'PostgreSQL', icon: '🐘', color: 'from-blue-700 to-blue-900' },
+              { name: 'Docker', icon: '🐳', color: 'from-blue-400 to-blue-600' },
+              { name: 'AWS', icon: '☁️', color: 'from-orange-500 to-yellow-500' },
+              { name: 'Kafka', icon: '⚡', color: 'from-purple-500 to-pink-500' },
+              { name: 'Spark', icon: '🔥', color: 'from-red-500 to-orange-500' },
+              { name: 'Kubernetes', icon: '☸️', color: 'from-blue-500 to-blue-700' },
+              { name: 'Git', icon: '📚', color: 'from-orange-600 to-red-600' },
+              { name: 'Linux', icon: '🐧', color: 'from-yellow-600 to-orange-600' }
+            ].map((skill, index) => (
               <motion.div
                 key={index}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-                }`}
-                variants={fadeInUp}
+                className="group cursor-pointer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
               >
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="relative w-full h-64 lg:h-80 rounded-2xl overflow-hidden bg-muted">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-4xl">🚀</span>
+                <div className={`bg-gradient-to-br ${skill.color} p-1 rounded-2xl`}>
+                  <div className="bg-background p-4 rounded-xl text-center group-hover:bg-transparent transition-all duration-300">
+                    <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                      {skill.icon}
+                    </div>
+                    <div className="text-sm font-medium text-foreground group-hover:text-white">
+                      {skill.name}
                     </div>
                   </div>
-                </div>
-                
-                <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <Card className="h-full">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Badge variant="secondary">Featured</Badge>
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
-                    <p className="text-muted-foreground mb-6">{project.description}</p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-sm">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                    
-                    <div className="flex gap-4">
-                      <Link
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-                      >
-                        Live Demo
-                        <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </Link>
-                      
-                      <Link
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
-                      >
-                        <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        GitHub
-                      </Link>
-                    </div>
-                  </Card>
                 </div>
               </motion.div>
             ))}
@@ -203,119 +292,9 @@ export default function ProjectsPage() {
         </div>
       </Section>
 
-      {/* Other Projects */}
-      <Section>
-        <div className="container">
-          <motion.div
-            className="text-center mb-16"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <h2 className="text-4xl font-bold mb-4">Other Projects</h2>
-            <p className="text-lg text-muted-foreground">
-              Additional projects and experiments
-            </p>
-          </motion.div>
-          
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {otherProjects.map((project, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full">
-                  <div className="relative w-full h-48 rounded-lg overflow-hidden bg-muted mb-4">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-3xl">💻</span>
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4 text-sm">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {project.tech.slice(0, 3).map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                    {project.tech.length > 3 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{project.tech.length - 3}
-                      </Badge>
-                    )}
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Link
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-                    >
-                      Live
-                    </Link>
-                    
-                    <Link
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center px-3 py-2 text-sm border border-border rounded-lg font-medium hover:bg-accent transition-colors"
-                    >
-                      Code
-                    </Link>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </Section>
-
-      {/* CTA Section */}
-      <Section className="bg-muted/50">
-        <div className="container">
-          <motion.div
-            className="text-center max-w-3xl mx-auto"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <h2 className="text-4xl font-bold mb-6">Interested in Working Together?</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              I&apos;m always excited to work on new projects and collaborate with amazing people. 
-              Let&apos;s discuss how we can bring your ideas to life.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-              >
-                Get In Touch
-              </Link>
-              
-              <Link
-                href="https://github.com/username"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-8 py-3 border border-border rounded-lg font-medium hover:bg-accent transition-colors"
-              >
-                <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                View on GitHub
-              </Link>
-            </div>
-          </motion.div>
-        </div>
+      {/* Project Filter System */}
+      <Section className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+        <ProjectFilter />
       </Section>
     </>
   )

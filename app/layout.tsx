@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 import { LoadingScreen } from '@/components/loading-screen'
 import { FloatingActionButton } from '@/components/floating-action-button'
 import { InteractiveCursor } from '@/components/interactive-cursor'
+import { ScrollProgress } from '@/components/enhanced-animations'
 import { siteConfig } from '@/lib/site'
 import './globals.css'
 
@@ -69,9 +70,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="alternate icon" href="/favicon.ico" />
       </head>
-      <body className={`${inter.className} bg-background text-foreground min-h-screen`}>
-        <LoadingScreen />
-        <InteractiveCursor />
+            <body className={`${inter.className} bg-background text-foreground min-h-screen`}>
+              <LoadingScreen />
+              <ScrollProgress />
+              <InteractiveCursor />
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1 pt-16">

@@ -24,8 +24,6 @@ export function ProfilePhoto({
   animated = true,
   showBorder = true 
 }: ProfilePhotoProps) {
-  console.log('ProfilePhoto rendering with size:', size);
-  
   return (
     <motion.div
       className={`relative ${sizeClasses[size]} ${className}`}
@@ -48,9 +46,8 @@ export function ProfilePhoto({
             objectFit: 'cover'
           }}
           priority
-          onLoad={() => console.log('Profile photo loaded successfully')}
+                 onLoad={() => {}}
           onError={(e) => {
-            console.error('Profile photo failed to load, trying fallback:', e);
             // Try the original filename as fallback
             e.currentTarget.src = '/mayank-photo.jpg';
           }}

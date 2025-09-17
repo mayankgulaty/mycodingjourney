@@ -13,6 +13,7 @@ interface CursorTrail {
 export function CursorTrail() {
   const trailRef = useRef<CursorTrail[]>([])
   const animationRef = useRef<number>()
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
     const canvas = document.createElement('canvas')
@@ -27,6 +28,8 @@ export function CursorTrail() {
     canvas.style.pointerEvents = 'none'
     canvas.style.zIndex = '9999'
     canvas.style.mixBlendMode = 'screen'
+    
+    canvasRef.current = canvas
     document.body.appendChild(canvas)
 
     const resizeCanvas = () => {
@@ -95,7 +98,9 @@ export function CursorTrail() {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
-      document.body.removeChild(canvas)
+      if (canvasRef.current && document.body.contains(canvasRef.current)) {
+        document.body.removeChild(canvasRef.current)
+      }
     }
   }, [])
 

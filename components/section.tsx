@@ -24,8 +24,7 @@ export function Section({ children, className, id }: SectionProps) {
       id={id}
       className={cn('section-padding', className)}
       initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, margin: '-100px' }}
+      animate="animate"
       variants={fadeInUp}
     >
       {children}

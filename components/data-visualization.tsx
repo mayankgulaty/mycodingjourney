@@ -39,7 +39,7 @@ export function DataVisualization() {
     return () => clearInterval(interval)
   }, [])
 
-  const maxValue = Math.max(...data.map(d => d.value))
+  const maxValue = data.length > 0 ? Math.max(...data.map(d => d.value)) : 100
 
   return (
     <div className="w-full h-64 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 relative overflow-hidden">

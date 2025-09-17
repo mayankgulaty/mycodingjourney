@@ -62,8 +62,10 @@ export function ParticleBackground() {
       particlesRef.current.forEach(particle => {
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = particle.color + Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')
+        ctx.fillStyle = particle.color
+        ctx.globalAlpha = particle.opacity
         ctx.fill()
+        ctx.globalAlpha = 1
       })
 
       // Draw connections
