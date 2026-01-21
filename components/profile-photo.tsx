@@ -18,11 +18,11 @@ const sizeClasses = {
   '2xl': 'w-48 h-48'
 }
 
-export function ProfilePhoto({ 
-  size = 'lg', 
-  className = '', 
+export function ProfilePhoto({
+  size = 'lg',
+  className = '',
   animated = true,
-  showBorder = true 
+  showBorder = true
 }: ProfilePhotoProps) {
   return (
     <motion.div
@@ -32,30 +32,28 @@ export function ProfilePhoto({
       transition={{ duration: 0.8, ease: "easeOut" }}
       whileHover={animated ? { scale: 1.05, rotate: 5 } : {}}
     >
-      <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 dark:from-gray-700 dark:to-gray-800 ${
-        showBorder ? 'ring-4 ring-white/20 ring-offset-4 ring-offset-transparent' : ''
-      }`}>
+      <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 dark:from-gray-700 dark:to-gray-800 ${showBorder ? 'ring-4 ring-white/20 ring-offset-4 ring-offset-transparent' : ''
+        }`}>
         <Image
-          src="/profile.jpg"
+          src="/me.jpg"
           alt="Mayank - Data Engineer & Full-stack Developer"
-          width={256}
-          height={256}
+          width={400}
+          height={400}
           className="w-full h-full object-cover"
-          style={{ 
-            objectPosition: 'center 25%',
+          style={{
+            objectPosition: 'center 30%', // Adjusted to keep face in middle
             objectFit: 'cover'
           }}
           priority
-                 onLoad={() => {}}
           onError={(e) => {
-            // Try the original filename as fallback
-            e.currentTarget.src = '/mayank-photo.jpg';
+            // Fallback
+            e.currentTarget.style.display = 'none';
           }}
         />
-        
+
         {/* Gradient overlay for professional look */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-        
+
         {/* Animated border glow */}
         {animated && (
           <motion.div
@@ -76,7 +74,7 @@ export function ProfilePhoto({
           />
         )}
       </div>
-      
+
       {/* Floating data elements around photo */}
       {animated && (
         <div className="absolute inset-0 pointer-events-none">

@@ -2,16 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Database, FileText, Zap, Settings, Server, Play, RotateCcw, CheckCircle, Activity, Box } from 'lucide-react'
 
 interface PipelineNode {
   id: string
   type: 'source' | 'transform' | 'destination' | 'process'
   title: string
   description: string
-  icon: string
+  icon: React.ReactNode
   color: string
-  x: number
-  y: number
   status: 'idle' | 'processing' | 'completed' | 'error'
 }
 
@@ -21,96 +20,84 @@ interface PipelineConnection {
   status: 'idle' | 'active' | 'completed'
 }
 
+// Map specialized gradients to node types
+const nodeStyles = {
+  source: "from-blue-600 to-cyan-600",
+  transform: "from-orange-500 to-amber-500",
+  process: "from-purple-600 to-pink-600",
+  destination: "from-emerald-500 to-teal-500"
+}
+
 export function InteractivePipeline() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
+
   const [nodes, setNodes] = useState<PipelineNode[]>([
     {
       id: 'source-1',
       type: 'source',
       title: 'PostgreSQL',
-      description: 'Customer data extraction',
-      icon: '🗄️',
-      color: 'bg-blue-500',
-      x: 0,
-      y: 0,
+      description: 'Raw User Data',
+      icon: <Database className="w-8 h-8" />,
+      color: nodeStyles.source,
       status: 'idle'
     },
     {
       id: 'transform-1',
       type: 'transform',
-      title: 'Data Cleaning',
-      description: 'Remove duplicates & validate',
-      icon: '🧹',
-      color: 'bg-yellow-500',
-      x: 0,
-      y: 0,
+      title: 'Cleaning',
+      description: 'Dedup & Validation',
+      icon: <FileText className="w-8 h-8" />,
+      color: nodeStyles.transform,
       status: 'idle'
     },
     {
       id: 'process-1',
       type: 'process',
-      title: 'Apache Spark',
-      description: 'ETL processing',
-      icon: '⚡',
-      color: 'bg-purple-500',
-      x: 0,
-      y: 0,
+      title: 'Spark Job',
+      description: 'Aggregation',
+      icon: <Zap className="w-8 h-8" />,
+      color: nodeStyles.process,
       status: 'idle'
     },
     {
       id: 'transform-2',
       type: 'transform',
-      title: 'Feature Engineering',
-      description: 'Create ML features',
-      icon: '🔧',
-      color: 'bg-green-500',
-      x: 0,
-      y: 0,
+      title: 'Feature Eng',
+      description: 'Vectorization',
+      icon: <Settings className="w-8 h-8" />,
+      color: "from-indigo-500 to-violet-500",
       status: 'idle'
     },
     {
       id: 'destination-1',
       type: 'destination',
-      title: 'Data Warehouse',
-      description: 'Analytics ready data',
-      icon: '📊',
-      color: 'bg-red-500',
-      x: 0,
-      y: 0,
+      title: 'Snowflake',
+      description: 'Analytics Ready',
+      icon: <Server className="w-8 h-8" />,
+      color: nodeStyles.destination,
       status: 'idle'
     }
   ])
 
-  const connections: PipelineConnection[] = [
-    { from: 'source-1', to: 'transform-1', status: 'idle' },
-    { from: 'transform-1', to: 'process-1', status: 'idle' },
-    { from: 'process-1', to: 'transform-2', status: 'idle' },
-    { from: 'transform-2', to: 'destination-1', status: 'idle' }
-  ]
-
   const pipelineSteps = [
-    { step: 0, description: 'Extract data from PostgreSQL database' },
-    { step: 1, description: 'Clean and validate incoming data' },
-    { step: 2, description: 'Process data with Apache Spark' },
-    { step: 3, description: 'Engineer features for ML models' },
-    { step: 4, description: 'Load into data warehouse' }
+    { step: 0, description: 'Extracting raw change data from PostgreSQL...' },
+    { step: 1, description: 'Running data quality checks and deduplication...' },
+    { step: 2, description: 'Aggregating metrics via Apache Spark cluster...' },
+    { step: 3, description: 'Generating ML features for propensity models...' },
+    { step: 4, description: 'Loading final tables into Data Warehouse.' }
   ]
 
   const startPipeline = () => {
     setIsPlaying(true)
     setCurrentStep(0)
-    
-    // Reset all nodes
     setNodes(prev => prev.map(node => ({ ...node, status: 'idle' })))
-    
-    // Animate through each step
+
     const stepInterval = setInterval(() => {
       setCurrentStep(prev => {
         if (prev >= pipelineSteps.length - 1) {
           clearInterval(stepInterval)
           setIsPlaying(false)
-          // Mark all nodes as completed when pipeline finishes
           setNodes(prev => prev.map(node => ({ ...node, status: 'completed' })))
           return prev
         }
@@ -125,207 +112,175 @@ export function InteractivePipeline() {
     setNodes(prev => prev.map(node => ({ ...node, status: 'idle' })))
   }
 
-  // Update node status based on current step
   useEffect(() => {
     if (isPlaying) {
       setNodes(prev => prev.map((node, index) => {
-        if (index < currentStep) {
-          return { ...node, status: 'completed' }
-        } else if (index === currentStep) {
-          return { ...node, status: 'processing' }
-        } else {
-          return { ...node, status: 'idle' }
-        }
+        if (index < currentStep) return { ...node, status: 'completed' }
+        else if (index === currentStep) return { ...node, status: 'processing' }
+        else return { ...node, status: 'idle' }
       }))
     }
   }, [currentStep, isPlaying])
 
-  const getNodeStatusColor = (status: string) => {
-    switch (status) {
-      case 'processing': return 'ring-4 ring-blue-300 animate-pulse'
-      case 'completed': return 'ring-4 ring-green-300'
-      case 'error': return 'ring-4 ring-red-300'
-      default: return ''
-    }
-  }
-
-  const getConnectionStatus = (fromId: string, toId: string) => {
-    const fromIndex = nodes.findIndex(n => n.id === fromId)
-    const toIndex = nodes.findIndex(n => n.id === toId)
-    
-    if (fromIndex < currentStep && toIndex <= currentStep) {
-      return 'active'
-    } else if (fromIndex === currentStep && toIndex === currentStep + 1) {
-      return 'active'
-    }
+  const getConnectionStatus = (index: number) => {
+    if (index < currentStep) return 'completed'
+    if (index === currentStep) return 'active'
     return 'idle'
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-8">
-      <div className="text-center mb-8">
-        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          Interactive Data Pipeline
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Click &quot;Run Pipeline&quot; to see how data flows through my ETL process
-        </p>
-        
-        <div className="flex justify-center gap-4 mb-8">
+    <div className="w-full text-slate-200">
+
+      {/* Controls */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+        <div className="flex gap-4">
           <motion.button
             onClick={startPipeline}
             disabled={isPlaying}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-              isPlaying 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-blue-600 hover:bg-blue-700 text-white'
-            }`}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all shadow-lg ${isPlaying
+                ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-500/25'
+              }`}
             whileHover={{ scale: isPlaying ? 1 : 1.05 }}
-            whileTap={{ scale: isPlaying ? 1 : 0.95 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {isPlaying ? 'Running...' : 'Run Pipeline'}
+            {isPlaying ? <Activity className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5" />}
+            {isPlaying ? 'Processing...' : 'Run Pipeline'}
           </motion.button>
-          
+
           <motion.button
             onClick={resetPipeline}
-            className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-slate-800 border border-slate-700 hover:bg-slate-700 text-white rounded-xl font-semibold transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Reset
+            <RotateCcw className="w-4 h-4" /> Reset
           </motion.button>
         </div>
 
-        {/* Current Step Indicator */}
-        <AnimatePresence>
-          {isPlaying && (
+        {/* Status Display */}
+        <AnimatePresence mode="wait">
+          {isPlaying ? (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6"
+              key="active"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="flex items-center gap-3 bg-slate-800/50 px-5 py-3 rounded-lg border border-indigo-500/30 text-indigo-200"
             >
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                <span className="font-semibold text-blue-700 dark:text-blue-300">
-                  Step {currentStep + 1} of {pipelineSteps.length}
-                </span>
-              </div>
-              <p className="text-blue-600 dark:text-blue-400">
-                {pipelineSteps[currentStep]?.description}
-              </p>
+              <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+              <span className="text-sm font-medium">{pipelineSteps[currentStep]?.description}</span>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="idle"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-slate-500 text-sm italic"
+            >
+              System Ready. Waiting for job trigger...
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Pipeline Visualization */}
-      <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-8">
-        {/* Pipeline Grid */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4">
+      {/* Nodes Visualization */}
+      <div className="relative py-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between relative z-10 gap-8">
           {nodes.map((node, index) => (
-            <div key={node.id} className="flex flex-col lg:flex-row items-center">
-              {/* Node */}
+            <div key={node.id} className="flex flex-col lg:flex-row items-center w-full">
+
+              {/* Node Card */}
               <motion.div
-                className={`relative ${getNodeStatusColor(node.status)}`}
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                className={`relative z-20 group w-full lg:w-auto`}
+                animate={{
+                  scale: node.status === 'processing' ? 1.1 : 1,
+                  filter: node.status === 'idle' ? 'grayscale(0.5)' : 'grayscale(0)'
+                }}
               >
-                <div className={`w-24 h-24 lg:w-32 lg:h-32 ${node.color} rounded-2xl shadow-lg flex flex-col items-center justify-center text-white relative overflow-hidden`}>
-                  {/* Processing Animation */}
+                <div className={`
+                  w-full lg:w-32 h-32 rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2
+                  bg-gradient-to-br ${node.color} shadow-xl relative overflow-hidden transition-all duration-300
+                  ${node.status === 'processing' ? 'ring-4 ring-white/20 ring-offset-2 ring-offset-slate-900' : ''}
+                `}>
+
+                  {/* Inner shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <div className="text-white drop-shadow-md relative z-10">
+                    {node.icon}
+                  </div>
+                  <div className="font-bold text-white text-sm leading-tight relative z-10">
+                    {node.title}
+                  </div>
+                  <div className="text-[10px] text-white/80 font-medium uppercase tracking-wider relative z-10">
+                    {node.description}
+                  </div>
+
+                  {/* Status Indicator */}
+                  <div className="absolute top-2 right-2">
+                    {node.status === 'completed' && <CheckCircle className="w-4 h-4 text-white" />}
+                  </div>
+
+                  {/* Processing scanning bar */}
                   {node.status === 'processing' && (
                     <motion.div
                       className="absolute inset-0 bg-white/20"
-                      animate={{ x: ['-100%', '100%'] }}
-                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      animate={{ y: ['100%', '-100%'] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
                     />
                   )}
-                  
-                  {/* Completed Checkmark */}
-                  {node.status === 'completed' && (
-                    <motion.div
-                      className="absolute top-1 right-1 lg:top-2 lg:right-2"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <div className="w-4 h-4 lg:w-6 lg:h-6 bg-green-500 rounded-full flex items-center justify-center">
-                        <svg className="w-3 h-3 lg:w-4 lg:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  <div className="text-2xl lg:text-3xl mb-1">{node.icon}</div>
-                  <div className="text-xs lg:text-sm font-bold text-center px-1 lg:px-2 leading-tight">{node.title}</div>
-                  <div className="text-xs text-center px-1 lg:px-2 opacity-90 mt-1 hidden lg:block">{node.description}</div>
                 </div>
               </motion.div>
 
-              {/* Arrow/Connection */}
+              {/* Connecting Line (Desktop) */}
               {index < nodes.length - 1 && (
-                <motion.div
-                  className="flex items-center justify-center my-4 lg:my-0 lg:mx-2"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                >
-                  <motion.div
-                    className={`w-8 h-1 lg:w-12 lg:h-1 rounded-full ${
-                      getConnectionStatus(node.id, nodes[index + 1].id) === 'active' 
-                        ? 'bg-blue-500' 
-                        : 'bg-gray-400'
-                    }`}
-                    animate={{
-                      scaleX: getConnectionStatus(node.id, nodes[index + 1].id) === 'active' ? 1 : 0.5
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <motion.div
-                    className={`ml-1 w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 ${
-                      getConnectionStatus(node.id, nodes[index + 1].id) === 'active' 
-                        ? 'border-t-blue-500' 
-                        : 'border-t-gray-400'
-                    }`}
-                    animate={{
-                      scale: getConnectionStatus(node.id, nodes[index + 1].id) === 'active' ? 1 : 0.5
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </motion.div>
+                <div className="hidden lg:flex flex-1 mx-4 items-center justify-center h-full min-w-[3rem] relative">
+                  <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full bg-cyan-400 box-shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+                      initial={{ width: "0%" }}
+                      animate={{
+                        width: getConnectionStatus(index) === 'completed' || getConnectionStatus(index) === 'active' ? "100%" : "0%"
+                      }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+                </div>
               )}
+
+              {/* Connecting Line (Mobile) */}
+              {index < nodes.length - 1 && (
+                <div className="lg:hidden h-8 w-1 bg-slate-800 my-2 rounded-full overflow-hidden">
+                  <motion.div
+                    className="w-full bg-cyan-400"
+                    initial={{ height: "0%" }}
+                    animate={{
+                      height: getConnectionStatus(index) === 'completed' || getConnectionStatus(index) === 'active' ? "100%" : "0%"
+                    }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
+              )}
+
             </div>
           ))}
         </div>
-
-        {/* Mobile Description */}
-        <div className="mt-6 lg:hidden">
-          <div className="text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              {pipelineSteps[currentStep]?.description}
-            </p>
-          </div>
-        </div>
       </div>
 
-      {/* Pipeline Stats */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-lg">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">5</div>
-          <div className="text-gray-600 dark:text-gray-300">Pipeline Stages</div>
+      {/* Stats */}
+      <div className="flex gap-4 justify-center mt-12 text-slate-500 text-sm font-mono">
+        <div className="flex items-center gap-2">
+          <Server className="w-4 h-4" /> <span>Cluster Status: Stable</span>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-lg">
-          <div className="text-2xl font-bold text-green-600 dark:text-green-400">99.9%</div>
-          <div className="text-gray-600 dark:text-gray-300">Uptime</div>
+        <div className="flex items-center gap-2">
+          <Zap className="w-4 h-4" /> <span>Latency: 24ms</span>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-lg">
-          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">10TB+</div>
-          <div className="text-gray-600 dark:text-gray-300">Data Processed</div>
+        <div className="flex items-center gap-2">
+          <Box className="w-4 h-4" /> <span>Nodes: 5/5</span>
         </div>
       </div>
     </div>
   )
 }
+

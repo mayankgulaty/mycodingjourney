@@ -9,8 +9,8 @@ import { siteConfig } from '@/lib/site'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
-  animate: { 
-    opacity: 1, 
+  animate: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.6, ease: 'easeOut' }
   }
@@ -26,36 +26,37 @@ const stagger = {
 
 export default function AboutPage() {
   const skills = [
-    { category: 'Frontend', items: ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-    { category: 'Backend', items: ['Node.js', 'Python', 'Express.js', 'FastAPI', 'PostgreSQL', 'MongoDB'] },
-    { category: 'Tools', items: ['Git', 'Docker', 'AWS', 'Vercel', 'Figma', 'VS Code'] },
-    { category: 'Mobile', items: ['React Native', 'Expo', 'Flutter', 'iOS', 'Android'] }
+    { category: 'Languages', items: ['Python', 'SQL', 'Advanced SQL'] },
+    { category: 'Cloud', items: ['AWS (S3, Glue, Lambda, EMR)', 'Snowflake', 'Redshift'] },
+    { category: 'Big Data', items: ['Apache Spark (PySpark)', 'Hadoop', 'ETL Pipeline Design'] },
+    { category: 'Tools', items: ['Apache Airflow', 'Git', 'CI/CD', 'Docker', 'Jira'] },
+    { category: 'Governance', items: ['Data Lineage', 'Data Quality Frameworks', 'Compliance'] }
   ]
 
   const timeline = [
     {
-      year: '2024',
-      title: 'Senior Full-Stack Developer',
-      company: 'Tech Company',
-      description: 'Leading development of scalable web applications and mentoring junior developers.'
+      year: '01/2022 – Present',
+      title: 'Assistant Vice President, Data Engineer',
+      company: 'Citi | Dublin, Ireland',
+      description: 'Leading strategic migration of legacy DWH to AWS and Snowflake. Orchestrating complex ETL workflows and establishing data governance frameworks.'
     },
     {
-      year: '2022',
-      title: 'Full-Stack Developer',
-      company: 'Startup Inc',
-      description: 'Built and maintained multiple web applications using modern technologies.'
+      year: '02/2021 – 01/2022',
+      title: 'Apps Dev Intermediate Programmer Analyst',
+      company: 'Citi | Dublin, Ireland',
+      description: 'Spearheaded integration of modern cloud technologies and led cross-functional development projects ensuring high code quality.'
     },
     {
-      year: '2020',
-      title: 'Frontend Developer',
-      company: 'Digital Agency',
-      description: 'Created responsive and interactive user interfaces for various clients.'
+      year: '01/2017 – 02/2021',
+      title: 'Apps Dev Programmer Analyst',
+      company: 'Citi | Dublin, Ireland',
+      description: 'Developed robust core software applications, refactored codebases for efficiency, and resolved critical technical issues.'
     },
     {
-      year: '2018',
-      title: 'Computer Science Degree',
-      company: 'University',
-      description: 'Graduated with a Bachelor\'s degree in Computer Science.'
+      year: '08/2015 – 11/2015',
+      title: 'Junior Associate, Technology',
+      company: 'Nagarro | Gurugram, India',
+      description: 'Provided troubleshooting for enterprise projects and collaborated on rapid prototyping initiatives.'
     }
   ]
 
@@ -79,24 +80,22 @@ export default function AboutPage() {
                 {siteConfig.author.bio}
               </p>
               <p className="text-lg text-muted-foreground mb-8">
-                I&apos;m passionate about creating digital experiences that are not only functional 
-                but also beautiful and intuitive. With over 5 years of experience in web development, 
-                I&apos;ve had the opportunity to work with amazing teams and build products that impact 
-                thousands of users.
+                I&apos;m an experienced Data Engineer and Assistant Vice President with over 9 years of expertise in designing scalable data architectures and cloud solutions. I specialize in migrating legacy systems to modern cloud platforms like AWS and Snowflake, and building robust ETL pipelines.
               </p>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">Available for work</Badge>
                 <Badge variant="outline">Open to collaboration</Badge>
               </div>
             </motion.div>
-            
+
             <motion.div variants={fadeInUp} className="relative">
-              <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden">
+              <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                 <Image
-                  src="/avatar.jpg"
+                  src="/me.jpg"
                   alt={siteConfig.author.name}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: 'center 30%' }}
                   priority
                 />
               </div>
@@ -122,9 +121,9 @@ export default function AboutPage() {
               Technologies and tools I work with
             </p>
           </motion.div>
-          
+
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -132,11 +131,11 @@ export default function AboutPage() {
           >
             {skills.map((skillGroup, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card>
-                  <h3 className="text-xl font-semibold mb-4">{skillGroup.category}</h3>
+                <Card className="h-full">
+                  <h3 className="text-xl font-semibold mb-4 text-primary">{skillGroup.category}</h3>
                   <div className="flex flex-wrap gap-2">
                     {skillGroup.items.map((skill) => (
-                      <Badge key={skill} variant="outline" className="text-sm">
+                      <Badge key={skill} variant="secondary" className="text-sm py-1">
                         {skill}
                       </Badge>
                     ))}
@@ -158,12 +157,12 @@ export default function AboutPage() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <h2 className="text-4xl font-bold mb-4">My Journey</h2>
+            <h2 className="text-4xl font-bold mb-4">Work Experience</h2>
             <p className="text-lg text-muted-foreground">
               A timeline of my professional experience
             </p>
           </motion.div>
-          
+
           <motion.div
             className="max-w-3xl mx-auto"
             initial="initial"
@@ -179,7 +178,7 @@ export default function AboutPage() {
               >
                 <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full"></div>
                 <div className="absolute left-2 top-4 w-0.5 h-full bg-border"></div>
-                
+
                 <div className="bg-card border border-border rounded-lg p-6">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                     <h3 className="text-xl font-semibold">{item.title}</h3>
@@ -196,7 +195,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Values Section */}
+      {/* Education Section */}
       <Section className="bg-muted/50">
         <div className="container">
           <motion.div
@@ -206,41 +205,74 @@ export default function AboutPage() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <h2 className="text-4xl font-bold mb-4">What I Value</h2>
+            <h2 className="text-4xl font-bold mb-4">Education</h2>
             <p className="text-lg text-muted-foreground">
-              The principles that guide my work
+              Academic background
             </p>
           </motion.div>
-          
+
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeInUp}>
+              <Card className="h-full flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-primary mb-2">MSc in Data Analytics</h3>
+                  <p className="text-muted-foreground mb-1">National College of Ireland</p>
+                  <p className="text-sm text-muted-foreground/80 mb-4">01/2016 – 01/2017</p>
+                </div>
+                <Badge variant="outline" className="self-start border-emerald-500/30 text-emerald-500">First Class Honors</Badge>
+              </Card>
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <Card className="h-full flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-primary mb-2">B.Tech in Computer Science</h3>
+                  <p className="text-muted-foreground mb-1">UPES</p>
+                  <p className="text-sm text-muted-foreground/80 mb-4">01/2011 – 01/2015</p>
+                </div>
+                <Badge variant="outline" className="self-start">Open Source Specialization</Badge>
+              </Card>
+            </motion.div>
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Certifications Section */}
+      <Section>
+        <div className="container">
+          <motion.div
+            className="text-center mb-16"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <h2 className="text-4xl font-bold mb-4">Certifications</h2>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={stagger}
           >
             {[
-              {
-                title: 'Quality',
-                description: 'I believe in writing clean, maintainable code and creating products that users love.',
-                icon: '✨'
-              },
-              {
-                title: 'Learning',
-                description: 'Technology evolves rapidly, and I\'m always eager to learn new tools and techniques.',
-                icon: '📚'
-              },
-              {
-                title: 'Collaboration',
-                description: 'Great products are built by great teams. I value open communication and teamwork.',
-                icon: '🤝'
-              }
-            ].map((value, index) => (
+              "Snowflake: Hands On Essentials - Data Warehouse, Data Applications, Data Sharing",
+              "AWS: Machine Learning Foundations",
+              "Udacity: AI Programming with Python Nanodegree",
+              "SQL: Writing Advanced SQL Queries"
+            ].map((cert, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="text-center">
-                  <div className="text-4xl mb-4">{value.icon}</div>
-                  <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-muted-foreground">{value.description}</p>
+                <Card className="py-4 px-6 flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                  <span className="font-medium">{cert}</span>
                 </Card>
               </motion.div>
             ))}
@@ -250,4 +282,3 @@ export default function AboutPage() {
     </>
   )
 }
-

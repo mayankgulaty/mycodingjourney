@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { NavLink } from './nav-link'
 import { ThemeToggle } from './theme-toggle'
 import { Logo } from './logo'
-import { ProfilePhoto } from './profile-photo'
+
 import { siteConfig } from '@/lib/site'
 
 export function Header() {
@@ -34,11 +34,10 @@ export function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        mounted && isScrolled
-          ? 'glass-morphism border-b border-border'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${mounted && isScrolled
+        ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-sm'
+        : 'bg-transparent'
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -50,7 +49,7 @@ export function Header() {
             whileTap={{ scale: 0.95 }}
             className="flex items-center space-x-3"
           >
-            <ProfilePhoto size="sm" animated={false} showBorder={false} />
+
             <Logo size="md" animated />
             <Link
               href="/"

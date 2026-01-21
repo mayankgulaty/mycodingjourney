@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayank Gulaty - Resume</title>
+    <style>
+        /* Apple-style Typography and Layout */
+        :root {
+            --primary-color: #111;
+            /* Soft Black */
+            --secondary-color: #666;
+            /* Dark Grey for metadata */
+            --accent-color: #0071e3;
+            /* Apple Blue for links */
+            --line-color: #e5e5e5;
+            /* Light grey for separators */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: var(--primary-color);
+            line-height: 1.5;
+            max-width: 800px;
+            /* Standard A4 width ratio */
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin: 0 0 10px 0;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Experience & Content */
+        .job-block {
+            margin-bottom: 25px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .location {
+            font-weight: 400;
+            color: var(--secondary-color);
+            margin-left: 5px;
+        }
+
+        .role {
+            font-size: 15px;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .date {
+            font-size: 14px;
+            color: var(--secondary-color);
+            white-space: nowrap;
+        }
+
+        ul {
+            list-style-type: none;
+            /* Remove default bullets */
+            padding-left: 0;
+            margin: 0;
+        }
+
+        li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #999;
+            /* Subtle bullet color */
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .skill-category {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .skill-list {
+            color: #444;
+        }
+
+        /* Print adjustments */
+        @media print {
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Mayank Gulaty</h1>
+        <div class="contact-info">
+            Dublin, Ireland &nbsp;|&nbsp; +353 892210986 &nbsp;|&nbsp; <a
+                href="mailto:mayankgulaty@gmail.com">mayankgulaty@gmail.com</a><br>
+            <a href="#">LinkedIn</a> &nbsp;|&nbsp; <a href="#">GitHub</a> &nbsp;|&nbsp; Irish Citizen
+        </div>
+    </header>
+
+    <section>
+        <h2>Profile</h2>
+        <p style="font-size: 14px; color: #333;">
+            An experienced Data Engineer and Assistant Vice President with over 9 years of expertise in designing
+            scalable data architectures and cloud solutions. Proven track record in migrating legacy data warehouses to
+            AWS and Snowflake, optimizing ETL pipelines for multi-terabyte datasets, and establishing robust data
+            governance frameworks. Proficient in Big Data technologies (Spark) and orchestration, with a strong focus on
+            building reliable, observable data systems that empower analytics and machine learning teams.
+        </p>
+    </section>
+
+    <section>
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <span class="skill-category">Languages</span>
+            <span class="skill-list">Python, SQL, Advanced SQL</span>
+        </div>
+        <div class="skills-grid">
+            <span class="skill-category">Cloud</span>
+            <span class="skill-list">AWS (S3, Glue, Lambda, EMR), Snowflake, Redshift</span>
+        </div>
+        <div class="skills-grid">
+            <span class="skill-category">Big Data</span>
+            <span class="skill-list">Apache Spark (PySpark), Hadoop, ETL Pipeline Design</span>
+        </div>
+        <div class="skills-grid">
+            <span class="skill-category">Tools</span>
+            <span class="skill-list">Apache Airflow, Git, CI/CD, Docker, Jira</span>
+        </div>
+        <div class="skills-grid">
+            <span class="skill-category">Governance</span>
+            <span class="skill-list">Data Lineage, Data Quality Frameworks, Compliance</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Work Experience</h2>
+
+        <div class="job-block">
+            <div class="job-header">
+                <div><span class="company">Citi</span> <span class="location">| Dublin, Ireland</span></div>
+                <span class="date">01/2022 – Present</span>
+            </div>
+            <span class="role">Assistant Vice President, Data Engineer</span>
+            <ul>
+                [cite_start]<li><strong>Cloud Migration Architecture:</strong> Leading the strategic migration of the
+                    in-house legacy data warehouse to AWS and Snowflake[cite: 9, 16], designing scalable schemas that
+                    improve query performance.</li>
+                [cite_start]<li><strong>Big Data Pipelines:</strong> Developed and optimized scalable data pipelines
+                    using Python and Apache Spark, processing terabytes of data to deliver actionable insights[cite:
+                    20].</li>
+                <li><strong>Orchestration & Automation:</strong> Orchestrated complex ETL workflows using Airflow to
+                    ensure timely data availability and minimize pipeline downtime.</li>
+                [cite_start]<li><strong>Data Governance & Lineage:</strong> Established comprehensive data governance
+                    and lineage frameworks, creating a unified view of data dependencies[cite: 22].</li>
+                [cite_start]<li><strong>Analytics Engineering:</strong> Partnered with Data Science teams to build
+                    feature stores and refine data processing for machine learning models, optimizing efficiency by
+                    30%[cite: 23, 24].</li>
+                [cite_start]<li><strong>Performance Optimization:</strong> Engineered pipeline improvements that reduced
+                    data ingestion time by 50%, enabling faster decision-making[cite: 25].</li>
+                [cite_start]<li><strong>Team Leadership:</strong> Mentored a team of junior data engineers, fostering a
+                    culture of technical excellence and achieving a 40% improvement in team delivery metrics[cite: 21,
+                    27].</li>
+            </ul>
+        </div>
+
+        <div class="job-block">
+            <div class="job-header">
+                <div><span class="company">Citi</span> <span class="location">| Dublin, Ireland</span></div>
+                <span class="date">02/2021 – 01/2022</span>
+            </div>
+            <span class="role">Apps Dev Intermediate Programmer Analyst</span>
+            <ul>
+                [cite_start]<li><strong>Application Modernization:</strong> Spearheaded the integration of modern cloud
+                    technologies into existing applications, enhancing scalability and user experience[cite: 32].</li>
+                [cite_start]<li><strong>Engineering Excellence:</strong> Led cross-functional development projects,
+                    ensuring high code quality through rigorous testing and adherence to CI/CD best practices[cite: 30,
+                    33].</li>
+                [cite_start]<li><strong>System Optimization:</strong> Tackled complex programming challenges to optimize
+                    application performance and reliability[cite: 31].</li>
+                [cite_start]<li><strong>Mentorship:</strong> Acted as a primary mentor for junior programmers,
+                    conducting code reviews and guiding technical development[cite: 34].</li>
+            </ul>
+        </div>
+
+        <div class="job-block">
+            <div class="job-header">
+                <div><span class="company">Citi</span> <span class="location">| Dublin, Ireland</span></div>
+                <span class="date">01/2017 – 02/2021</span>
+            </div>
+            <span class="role">Apps Dev Programmer Analyst</span>
+            <ul>
+                [cite_start]<li><strong>Software Development:</strong> Developed and enhanced core software
+                    applications, focusing on robust data handling and functionality[cite: 40].</li>
+                [cite_start]<li><strong>Code Optimization:</strong> Analyzed and refactored codebases to improve
+                    efficiency and maintainability[cite: 41].</li>
+                [cite_start]<li><strong>Problem Solving:</strong> Resolved critical technical issues and bugs, ensuring
+                    smooth application operations[cite: 42].</li>
+            </ul>
+        </div>
+
+        <div class="job-block">
+            <div class="job-header">
+                <div><span class="company">Nagarro</span> <span class="location">| Gurugram, India</span></div>
+                <span class="date">08/2015 – 11/2015</span>
+            </div>
+            <span class="role">Junior Associate, Technology</span>
+            <ul>
+                [cite_start]<li>Provided troubleshooting and technical support for enterprise technology projects[cite:
+                    48].</li>
+                [cite_start]<li>Collaborated with senior developers on technology initiatives and rapid
+                    prototyping[cite: 50].</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <div class="job-block">
+            <div class="job-header">
+                <span class="company">National College of Ireland</span>
+                <span class="date">01/2016 – 01/2017</span>
+            </div>
+            [cite_start]<span class="role">MSc in Data Analytics (First Class Honors) [cite: 72]</span>
+        </div>
+        <div class="job-block">
+            <div class="job-header">
+                <span class="company">UPES</span>
+                <span class="date">01/2011 – 01/2015</span>
+            </div>
+            [cite_start]<span class="role">B.Tech in Computer Science (Open Source Specialization) [cite: 75, 77]</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Certifications</h2>
+        <ul>
+            [cite_start]<li><strong>Snowflake:</strong> Hands On Essentials - Data Warehouse, Data Applications, Data
+                Sharing [cite: 53, 56, 59]</li>
+            [cite_start]<li><strong>AWS:</strong> Machine Learning Foundations [cite: 63]</li>
+            [cite_start]<li><strong>Udacity:</strong> AI Programming with Python Nanodegree [cite: 95]</li>
+            [cite_start]<li><strong>SQL:</strong> Writing Advanced SQL Queries [cite: 67]</li>
+        </ul>
+    </section>
+</body>
+
+</html>
