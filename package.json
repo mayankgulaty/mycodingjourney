@@ -9,12 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
+    "@codesandbox/sandpack-themes": "^2.0.21",
+    "@supabase/supabase-js": "^2.78.0",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.16",
     "lucide-react": "^0.562.0",
     "next": "14.0.4",
+    "next-mdx-remote": "^5.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "reading-time": "^1.5.0",
+    "shiki": "^3.21.0",
+    "slugify": "^1.6.6",
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
