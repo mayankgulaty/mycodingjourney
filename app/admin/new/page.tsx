@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import {
     Save,
@@ -14,9 +14,15 @@ import {
     Upload,
     Image as ImageIcon,
     Move,
-    Trash2
+    Trash2,
+    Clock,
+    Check,
+    FileText,
+    Timer
 } from 'lucide-react'
 import { parseMarkdownPreview } from '@/lib/markdown-preview'
+import { MarkdownToolbar } from '@/components/markdown-toolbar'
+import { useToast } from '@/components/toast'
 
 export default function NewArticlePage() {
     const [content, setContent] = useState('')
@@ -36,9 +42,33 @@ export default function NewArticlePage() {
     const [password, setPassword] = useState('')
     const [isDragging, setIsDragging] = useState(false)
     const [showPositioner, setShowPositioner] = useState(false)
+    const [lastSaved, setLastSaved] = useState<Date | null>(null)
+    const [autoSaveStatus, setAutoSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle')
     const imageContainerRef = useRef<HTMLDivElement>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const contentTextareaRef = useRef<HTMLTextAreaElement>(null)
     const router = useRouter()
+    const { success, error: showError } = useToast()
+
+    // Calculate word count and reading time
+    const contentStats = useMemo(() => {
+        if (!content) return { words: 0, characters: 0, readingTime: 0 }
+        
+        // Remove markdown syntax for accurate word count
+        const plainText = content
+            .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+            .replace(/`[^`]+`/g, '') // Remove inline code
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with text
+            .replace(/[#*_~`>]/g, '') // Remove markdown symbols
+            .replace(/:::[\w]+/g, '') // Remove callout syntax
+            .trim()
+        
+        const words = plainText.split(/\s+/).filter(word => word.length > 0).length
+        const characters = content.length
+        const readingTime = Math.max(1, Math.ceil(words / 200)) // 200 words per minute
+        
+        return { words, characters, readingTime }
+    }, [content])
 
     // Get auth from session
     useEffect(() => {
@@ -48,7 +78,143 @@ export default function NewArticlePage() {
             return
         }
         setPassword(storedPassword)
+        
+        // Load draft from localStorage
+        const savedDraft = localStorage.getItem('article_draft')
+        if (savedDraft) {
+            try {
+                const draft = JSON.parse(savedDraft)
+                if (draft.content) setContent(draft.content)
+                if (draft.title) setTitle(draft.title)
+                if (draft.slug) setSlug(draft.slug)
+                if (draft.excerpt) setExcerpt(draft.excerpt)
+                if (draft.tags) setTags(draft.tags)
+                if (draft.coverImage) setCoverImage(draft.coverImage)
+                if (draft.featured) setFeatured(draft.featured)
+                setLastSaved(draft.savedAt ? new Date(draft.savedAt) : null)
+            } catch (e) {
+                console.error('Error loading draft:', e)
+            }
+        }
     }, [router])
+
+    // Autosave to localStorage every 30 seconds
+    useEffect(() => {
+        if (!content && !title) return // Don't save empty drafts
+        
+        const saveTimer = setTimeout(() => {
+            setAutoSaveStatus('saving')
+            const draft = {
+                content,
+                title,
+                slug,
+                excerpt,
+                tags,
+                coverImage,
+                featured,
+                savedAt: new Date().toISOString()
+            }
+            localStorage.setItem('article_draft', JSON.stringify(draft))
+            setLastSaved(new Date())
+            setAutoSaveStatus('saved')
+            
+            // Reset status after 2 seconds
+            setTimeout(() => setAutoSaveStatus('idle'), 2000)
+        }, 30000) // 30 seconds
+        
+        return () => clearTimeout(saveTimer)
+    }, [content, title, slug, excerpt, tags, coverImage, featured])
+
+    // Clear draft when article is saved
+    const clearDraft = () => {
+        localStorage.removeItem('article_draft')
+    }
+
+    // Keyboard shortcuts helper for text formatting
+    const insertTextAtCursor = (before: string, after: string) => {
+        const textarea = contentTextareaRef.current
+        if (!textarea) return
+
+        const start = textarea.selectionStart
+        const end = textarea.selectionEnd
+        const selectedText = content.substring(start, end)
+
+        const newContent = 
+            content.substring(0, start) + 
+            before + 
+            selectedText + 
+            after + 
+            content.substring(end)
+
+        setContent(newContent)
+
+        // Restore focus and selection
+        setTimeout(() => {
+            textarea.focus()
+            if (selectedText) {
+                textarea.setSelectionRange(start + before.length, end + before.length)
+            } else {
+                const cursorPos = start + before.length
+                textarea.setSelectionRange(cursorPos, cursorPos)
+            }
+        }, 0)
+    }
+
+    // Keyboard shortcuts
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // Check if the target is the content textarea
+            const isInContentTextarea = document.activeElement === contentTextareaRef.current
+
+            // Ctrl+S or Cmd+S: Save draft
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault()
+                saveArticle(false)
+                return
+            }
+
+            // Ctrl+Shift+S or Cmd+Shift+S: Publish
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 's') {
+                e.preventDefault()
+                saveArticle(true)
+                return
+            }
+
+            // Only process formatting shortcuts when in the textarea
+            if (!isInContentTextarea) return
+
+            // Ctrl+B or Cmd+B: Bold
+            if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+                e.preventDefault()
+                insertTextAtCursor('**', '**')
+                return
+            }
+
+            // Ctrl+I or Cmd+I: Italic
+            if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+                e.preventDefault()
+                insertTextAtCursor('*', '*')
+                return
+            }
+
+            // Ctrl+K or Cmd+K: Link
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault()
+                insertTextAtCursor('[', '](url)')
+                return
+            }
+
+            // Ctrl+` : Inline code
+            if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+                e.preventDefault()
+                insertTextAtCursor('`', '`')
+                return
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [content]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // Auto-extract title from content
     useEffect(() => {
@@ -220,12 +386,12 @@ export default function NewArticlePage() {
 
     const saveArticle = async (shouldPublish: boolean) => {
         if (!content.trim()) {
-            setError('Content is required')
+            showError('Content is required')
             return
         }
 
         if (!title.trim()) {
-            setError('Title is required (add a # heading to your content or fill in the title field)')
+            showError('Title is required (add a # heading to your content or fill in the title field)')
             return
         }
 
@@ -261,14 +427,16 @@ export default function NewArticlePage() {
             const data = await response.json()
 
             if (!response.ok) {
-                setError(data.error || 'Failed to save article')
+                showError(data.error || 'Failed to save article')
                 return
             }
 
+            clearDraft() // Clear the local draft after successful save
+            success(shouldPublish ? 'Article published successfully!' : 'Draft saved successfully!')
             router.push('/admin')
         } catch (err) {
             console.error('Error saving article:', err)
-            setError('Failed to save article')
+            showError('Failed to save article')
         } finally {
             setSaving(false)
         }
@@ -289,6 +457,28 @@ export default function NewArticlePage() {
                         <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                             New Article
                         </h1>
+                        {/* Autosave Status */}
+                        {autoSaveStatus !== 'idle' && (
+                            <div className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+                                {autoSaveStatus === 'saving' ? (
+                                    <>
+                                        <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                        <span>Saving...</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Check className="w-3.5 h-3.5 text-green-500" />
+                                        <span>Saved</span>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                        {lastSaved && autoSaveStatus === 'idle' && (
+                            <div className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                                <Clock className="w-3 h-3" />
+                                <span>Last saved {lastSaved.toLocaleTimeString()}</span>
+                            </div>
+                        )}
                     </div>
                     <div className="flex items-center gap-3">
                         <button
@@ -337,13 +527,19 @@ export default function NewArticlePage() {
                     <div className={showPreview ? 'lg:col-span-1' : 'lg:col-span-2'}>
                         <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
                             <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Content (Markdown)
                                 </label>
+                                <MarkdownToolbar 
+                                    textareaRef={contentTextareaRef}
+                                    content={content}
+                                    onContentChange={setContent}
+                                />
                                 <textarea
+                                    ref={contentTextareaRef}
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
-                                    className="w-full h-[60vh] px-4 py-3 font-mono text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                                    className="w-full h-[60vh] px-4 py-3 font-mono text-sm border border-gray-300 dark:border-gray-600 rounded-b-lg border-t-0 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                                     placeholder={`# Your Article Title
 
 Write your article content here using Markdown...
@@ -372,6 +568,20 @@ This is an info callout.
 This is a warning callout.
 :::`}
                                 />
+                                {/* Word count and reading time */}
+                                <div className="flex items-center justify-between mt-2 px-1 text-xs text-gray-500 dark:text-gray-400">
+                                    <div className="flex items-center gap-4">
+                                        <span className="flex items-center gap-1">
+                                            <FileText className="w-3.5 h-3.5" />
+                                            {contentStats.words.toLocaleString()} words
+                                        </span>
+                                        <span>{contentStats.characters.toLocaleString()} characters</span>
+                                    </div>
+                                    <span className="flex items-center gap-1">
+                                        <Timer className="w-3.5 h-3.5" />
+                                        {contentStats.readingTime} min read
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
