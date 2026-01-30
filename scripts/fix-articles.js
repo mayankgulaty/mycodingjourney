@@ -32,8 +32,14 @@ function fixContent(content) {
     return `> **Note:** ${content.trim()}`;
   });
   
-  // Replace em-dashes with regular dashes if they cause issues
-  // fixed = fixed.replace(/—/g, '-');
+  // Fix angle brackets that MDX interprets as JSX (outside code blocks)
+  // Replace <5%, <50ms, >15 min patterns with text alternatives
+  fixed = fixed.replace(/\(<(\d+)%\)/g, '(less than $1%)');
+  fixed = fixed.replace(/\(>(\d+)%\)/g, '(over $1%)');
+  fixed = fixed.replace(/\(>(\d+) min\)/g, '(over $1 min)');
+  fixed = fixed.replace(/\(<(\d+) min\)/g, '(under $1 min)');
+  fixed = fixed.replace(/> (\d+) min/g, 'over $1 min');
+  fixed = fixed.replace(/< (\d+) min/g, 'under $1 min');
   
   return fixed;
 }

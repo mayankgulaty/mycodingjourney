@@ -35,7 +35,7 @@ Industry standard (and what I used):
 | On-Time | ±1 min | Within acceptable window |
 | Slight Delay | 1-5 min | Noticeable but manageable |
 | Moderate Delay | 5-15 min | Significant impact |
-| Severe Delay | > 15 min | Major disruption |
+| Severe Delay | over 15 min | Major disruption |
 
 ---
 
@@ -124,7 +124,7 @@ Why?
 
 I grouped routes into performance tiers:
 
-### Tier A: Reliable (>70% on-time)
+### Tier A: Reliable (over 70% on-time)
 ```python
 tier_a = ['46A', '39A', '145', '27', '17', '33', '40', '70']
 # Characteristic: Mostly suburban, limited city centre exposure

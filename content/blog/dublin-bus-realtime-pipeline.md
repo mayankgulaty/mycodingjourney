@@ -179,7 +179,7 @@ Analyzing the delay data reveals interesting patterns:
 | On-Time (±1 min) | 45.2% |
 | Slight Delay (1-5 min) | 28.7% |
 | Moderate (5-15 min) | 18.4% |
-| Severe (>15 min) | 7.7% |
+| Severe (over 15 min) | 7.7% |
 
 Nearly half of all buses are on-time, but over 7% have severe delays of 15+ minutes.
 

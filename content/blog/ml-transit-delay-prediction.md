@@ -249,7 +249,7 @@ prediction = predict_delay(
 
 ### What Didn't Work
 
-1. **Weather data** - Surprisingly low correlation (<5%) with delays
+1. **Weather data** - Surprisingly low correlation (less than 5%) with delays
 2. **Exact GPS coordinates** - Too noisy; discretized zones work better
 3. **Deep learning** - Overkill and slower, no accuracy gain
 

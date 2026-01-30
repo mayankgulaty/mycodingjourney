@@ -231,7 +231,7 @@ That's **almost 4 working days** per year spent waiting for delayed buses.
 ### Analysis
 - Aggregated by hour and day of week
 - Weighted by sample size
-- Outliers (>30 min) excluded as likely data errors
+- Outliers (over 30 min) excluded as likely data errors
 
 ### Limitations
 - Short collection period
