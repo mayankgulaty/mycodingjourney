@@ -257,12 +257,12 @@ export default function ContactPage() {
                 <h3 className="text-xl font-semibold mb-4">What I can help with</h3>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    'Web Development',
-                    'Mobile Apps',
-                    'UI/UX Design',
-                    'Consulting',
-                    'Code Reviews',
-                    'Mentoring'
+                    'Data Pipeline Architecture',
+                    'ETL/ELT Systems',
+                    'Cloud Data Platforms',
+                    'Full-stack Web Apps',
+                    'System Design',
+                    'Technical Consulting'
                   ].map((skill) => (
                     <Badge key={skill} variant="outline">
                       {skill}

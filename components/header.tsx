@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Download } from 'lucide-react'
 import { NavLink } from './nav-link'
 import { ThemeToggle } from './theme-toggle'
 import { Logo } from './logo'
@@ -64,10 +65,19 @@ export function Header() {
             <NavLink href="/about">About</NavLink>
             <NavLink href="/projects">Projects</NavLink>
             <NavLink href="/blog">Blog</NavLink>
+            <NavLink href="/hire">Hire Me</NavLink>
             <NavLink href="/contact">Contact</NavLink>
           </nav>
 
           <div className="flex items-center space-x-4">
+            <a
+              href="/resume.pdf"
+              download
+              className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Resume
+            </a>
             <ThemeToggle />
             <motion.button
               className="md:hidden text-foreground"
@@ -144,12 +154,28 @@ export function Header() {
                     Blog
                   </Link>
                   <Link
+                    href="/hire"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
+                    onClick={closeMobileMenu}
+                  >
+                    Hire Me
+                  </Link>
+                  <Link
                     href="/contact"
                     className="text-foreground/80 hover:text-foreground transition-colors py-2"
                     onClick={closeMobileMenu}
                   >
                     Contact
                   </Link>
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="flex items-center gap-2 px-4 py-2 mt-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors w-fit"
+                    onClick={closeMobileMenu}
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Resume
+                  </a>
                 </nav>
               </div>
             </motion.div>

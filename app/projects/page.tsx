@@ -63,10 +63,10 @@ export default function ProjectsPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               {[
-                { number: '15+', label: 'Projects Built' },
-                { number: '5+', label: 'Technologies' },
-                { number: '3+', label: 'Years Experience' },
-                { number: '100%', label: 'Passion' }
+                { number: '8+', label: 'Years Experience' },
+                { number: '10B+', label: 'Records Processed' },
+                { number: '15+', label: 'Technologies' },
+                { number: '2', label: 'Fortune 500 Companies' }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -109,24 +109,24 @@ export default function ProjectsPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {/* Data Pipeline Project */}
+            {/* Dublin Bus Pipeline Project */}
             <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105">
               <div className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
-                    ⚡
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
+                    🚌
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground">Real-time Data Pipeline</h3>
-                    <p className="text-foreground/60">Apache Kafka + Spark + PostgreSQL</p>
+                    <h3 className="text-2xl font-bold text-foreground">Dublin Bus Real-Time Pipeline</h3>
+                    <p className="text-foreground/60">Python + GTFS-RT + SQLite + Streamlit</p>
                   </div>
                 </div>
                 <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Built a scalable real-time data processing pipeline that handles 1M+ events per day, 
-                  featuring automatic scaling, monitoring, and data quality checks.
+                  Complete data pipeline tracking 700+ buses in real-time across Dublin, 
+                  with interactive dashboard showing delays, routes, and performance analytics.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {['Apache Kafka', 'Apache Spark', 'PostgreSQL', 'Docker', 'Kubernetes', 'Python'].map((tech) => (
+                  {['Python', 'GTFS-RT API', 'SQLite', 'Pandas', 'Streamlit', 'Plotly'].map((tech) => (
                     <Badge key={tech} variant="outline" className="text-xs border-gray-300 text-gray-700 dark:border-white/30 dark:text-white/80">
                       {tech}
                     </Badge>
@@ -134,37 +134,37 @@ export default function ProjectsPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <Link
-                    href="#"
+                    href="/projects/case-studies/dublin-bus-pipeline"
                     className="inline-flex items-center text-primary hover:text-primary/80 font-medium group-hover:translate-x-2 transition-all duration-300"
                   >
-                    View Details
+                    View Case Study
                     <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </Link>
-                  <div className="text-sm text-foreground/60">2024</div>
+                  <div className="text-sm text-foreground/60">2026</div>
                 </div>
               </div>
             </Card>
 
-            {/* AI/ML Project */}
+            {/* ML Delay Prediction Project */}
             <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105">
               <div className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
-                    🤖
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
+                    🧠
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground">ML Model Deployment Platform</h3>
-                    <p className="text-foreground/60">FastAPI + TensorFlow + AWS</p>
+                    <h3 className="text-2xl font-bold text-foreground">Transit Delay Prediction</h3>
+                    <p className="text-foreground/60">XGBoost + Python + Scikit-learn</p>
                   </div>
                 </div>
                 <p className="text-foreground/80 mb-6 leading-relaxed">
-                  Developed an end-to-end ML platform for model training, deployment, and monitoring 
-                  with automated A/B testing and model versioning capabilities.
+                  ML model predicting bus delays 15 minutes in advance with 87% accuracy, 
+                  using feature engineering on real-time transit data.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {['Python', 'FastAPI', 'TensorFlow', 'AWS Sagemaker', 'Docker', 'React'].map((tech) => (
+                  {['Python', 'XGBoost', 'Scikit-learn', 'Pandas', 'Feature Engineering'].map((tech) => (
                     <Badge key={tech} variant="outline" className="text-xs border-gray-300 text-gray-700 dark:border-white/30 dark:text-white/80">
                       {tech}
                     </Badge>
@@ -172,15 +172,15 @@ export default function ProjectsPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <Link
-                    href="#"
+                    href="/projects/case-studies/transit-delay-prediction"
                     className="inline-flex items-center text-primary hover:text-primary/80 font-medium group-hover:translate-x-2 transition-all duration-300"
                   >
-                    View Details
+                    View Case Study
                     <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </Link>
-                  <div className="text-sm text-foreground/60">2024</div>
+                  <div className="text-sm text-foreground/60">2026</div>
                 </div>
               </div>
             </Card>
@@ -288,6 +288,35 @@ export default function ProjectsPage() {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Case Studies CTA */}
+      <Section className="py-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+        <div className="container text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+              Want the Full Story?
+            </h2>
+            <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
+              Dive deep into my projects with detailed case studies including architecture decisions, 
+              challenges overcome, and measurable business impact.
+            </p>
+            <Link
+              href="/projects/case-studies"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+            >
+              View Case Studies
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </motion.div>
         </div>
       </Section>

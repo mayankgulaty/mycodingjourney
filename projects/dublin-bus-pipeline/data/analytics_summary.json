@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-01-30T22:53:53.950207",
+  "fleet_summary": {
+    "total_position_records": 6121,
+    "total_update_records": 73208,
+    "unique_vehicles": 708,
+    "unique_routes": 198,
+    "data_start": "2026-01-30 22:44:10.601121",
+    "data_end": "2026-01-30 22:53:51.522046",
+    "snapshots": 9
+  },
+  "delay_statistics": {
+    "avg_delay_mins": 1.61,
+    "median_delay_mins": 0.0,
+    "max_delay_mins": 155.85,
+    "min_delay_mins": -69.18,
+    "std_delay_mins": 6.58,
+    "on_time_percentage": 71.2,
+    "early_percentage": 3.6,
+    "delayed_percentage": 25.2,
+    "severe_delay_percentage": 2.0,
+    "delay_distribution": {
+      "On Time": 52143,
+      "Slight Delay": 10413,
+      "Moderate Delay": 6561,
+      "Early": 2611,
+      "Severe Delay": 1480
+    }
+  },
+  "operator_breakdown": {
+    "Dublin Bus": 3,
+    "Go-Ahead Ireland": 27,
+    "Bus \u00c9ireann": 0,
+    "Other": 168
+  },
+  "top_routes": [
+    {
+      "route_id": "5332_120618",
+      "avg_delay": 1.22,
+      "median_delay": 0.0,
+      "std_delay": 3.67,
+      "sample_count": 2097,
+      "on_time_rate": 85.97997138769671
+    },
+    {
+      "route_id": "5332_120560",
+      "avg_delay": 0.63,
+      "median_delay": 0.0,
+      "std_delay": 2.7,
+      "sample_count": 2002,
+      "on_time_rate": 89.11088911088912
+    },
+    {
+      "route_id": "5332_120656",
+      "avg_delay": 1.62,
+      "median_delay": 0.0,
+      "std_delay": 5.52,
+      "sample_count": 1895,
+      "on_time_rate": 87.65171503957784
+    },
+    {
+      "route_id": "5332_120559",
+      "avg_delay": 1.38,
+      "median_delay": 0.0,
+      "std_delay": 4.08,
+      "sample_count": 1657,
+      "on_time_rate": 85.33494266747134
+    },
+    {
+      "route_id": "5332_120558",
+      "avg_delay": 1.5,
+      "median_delay": 0.0,
+      "std_delay": 3.93,
+      "sample_count": 1498,
+      "on_time_rate": 81.37516688918558
+    },
+    {
+      "route_id": "5242_119680",
+      "avg_delay": 1.1,
+      "median_delay": -0.25,
+      "std_delay": 3.95,
+      "sample_count": 1386,
+      "on_time_rate": 38.455988455988454
+    },
+    {
+      "route_id": "5332_120575",
+      "avg_delay": 0.3,
+      "median_delay": 0.0,
+      "std_delay": 1.55,
+      "sample_count": 1348,
+      "on_time_rate": 95.4005934718101
+    },
+    {
+      "route_id": "5332_120620",
+      "avg_delay": 1.5,
+      "median_delay": 0.0,
+      "std_delay": 3.31,
+      "sample_count": 1290,
+      "on_time_rate": 78.21705426356588
+    },
+    {
+      "route_id": "5242_118188",
+      "avg_delay": 2.79,
+      "median_delay": 2.52,
+      "std_delay": 2.82,
+      "sample_count": 1221,
+      "on_time_rate": 23.25962325962326
+    },
+    {
+      "route_id": "5332_120628",
+      "avg_delay": 0.64,
+      "median_delay": 0.0,
+      "std_delay": 1.95,
+      "sample_count": 1213,
+      "on_time_rate": 83.42951360263808
+    }
+  ]
+}

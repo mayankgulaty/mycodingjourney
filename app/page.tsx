@@ -22,25 +22,25 @@ export default function HomePage() {
 
   const projects = [
     {
-      title: 'AI Design System',
-      description: 'Generative AI platform for creating automated brand identities and UI components.',
-      tags: ['Next.js', 'OpenAI', 'TypeScript'],
-      link: 'http://localhost:3001',
-      icon: <Layout className="w-8 h-8 text-cyan-400" />
+      title: 'Dublin Bus Real-Time Pipeline',
+      description: 'Complete data pipeline tracking 700+ buses in real-time with interactive Streamlit dashboard.',
+      tags: ['Python', 'GTFS-RT', 'Streamlit'],
+      link: '/projects/case-studies/dublin-bus-pipeline',
+      icon: <Database className="w-8 h-8 text-cyan-400" />
     },
     {
-      title: 'E-Commerce Engine',
-      description: 'Headless commerce solution with high-performance edge caching and analytics.',
-      tags: ['Stripe', 'Redis', 'PostgreSQL'],
-      link: '/projects/ecommerce',
-      icon: <Globe className="w-8 h-8 text-indigo-400" />
+      title: 'Transit Delay Prediction',
+      description: 'ML model predicting bus delays 15 minutes in advance with 87% accuracy using XGBoost.',
+      tags: ['Python', 'XGBoost', 'ML'],
+      link: '/projects/case-studies/transit-delay-prediction',
+      icon: <Layers className="w-8 h-8 text-indigo-400" />
     },
     {
-      title: 'Data Pipeline Orchestrator',
-      description: 'Distributed extraction and transformation framework for petabyte-scale datasets.',
-      tags: ['Spark', 'Airflow', 'Python'],
-      link: '/projects/pipeline',
-      icon: <Database className="w-8 h-8 text-fuchsia-400" />
+      title: 'This Portfolio Site',
+      description: 'Modern full-stack web application with custom CMS, 100 Lighthouse score.',
+      tags: ['Next.js', 'TypeScript', 'Tailwind'],
+      link: '/projects/case-studies/portfolio-website',
+      icon: <Globe className="w-8 h-8 text-fuchsia-400" />
     }
   ]
 
@@ -134,9 +134,9 @@ export default function HomePage() {
             transition={{ duration: 1, delay: 1 }}
             className="mt-16 flex gap-6 justify-center text-muted-foreground"
           >
-            <a href="#" className="hover:text-blue-500 transition-colors"><Github className="w-6 h-6" /></a>
-            <a href="#" className="hover:text-blue-500 transition-colors"><Linkedin className="w-6 h-6" /></a>
-            <a href="mailto:hello@example.com" className="hover:text-blue-500 transition-colors"><Mail className="w-6 h-6" /></a>
+            <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Github className="w-6 h-6" /></a>
+            <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Linkedin className="w-6 h-6" /></a>
+            <a href={`mailto:${siteConfig.author.email}`} className="hover:text-blue-500 transition-colors"><Mail className="w-6 h-6" /></a>
           </motion.div>
         </div>
       </Section>

@@ -21,123 +21,87 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'etl-pipeline',
-    title: 'Real-time ETL Pipeline',
-    description: 'Built a scalable ETL pipeline using Apache Spark, Kafka, and PostgreSQL for processing 10TB+ of customer data daily.',
-    image: '/api/placeholder/400/300',
-    technologies: ['Apache Spark', 'Kafka', 'PostgreSQL', 'Docker', 'AWS'],
+    id: 'dublin-bus-pipeline',
+    title: 'Dublin Bus Real-Time Pipeline',
+    description: 'Complete data pipeline tracking 700+ buses in real-time across Dublin with interactive Streamlit dashboard showing delays and performance.',
+    image: '/blog-dublin-bus-pipeline.png',
+    technologies: ['Python', 'GTFS-RT', 'SQLite', 'Pandas', 'Streamlit', 'Plotly'],
     category: 'data-engineering',
     status: 'completed',
-    githubUrl: 'https://github.com/example/etl-pipeline',
-    liveUrl: 'https://example.com/dashboard',
+    githubUrl: 'https://github.com/mayankgulaty/mycodingjourney/tree/main/projects/dublin-bus-pipeline',
+    liveUrl: '/projects/case-studies/dublin-bus-pipeline',
     featured: true,
-    complexity: 'advanced'
+    complexity: 'intermediate'
   },
   {
-    id: 'ml-recommendation',
-    title: 'ML Recommendation Engine',
-    description: 'Developed a collaborative filtering recommendation system using PySpark MLlib and deployed with MLflow.',
-    image: '/api/placeholder/400/300',
-    technologies: ['PySpark', 'MLlib', 'MLflow', 'Python', 'Redis'],
+    id: 'transit-delay-prediction',
+    title: 'Transit Delay Prediction ML',
+    description: 'Machine learning model predicting bus delays 15 minutes in advance with 87% accuracy using XGBoost and feature engineering.',
+    image: '/blog-ml-delay-prediction.png',
+    technologies: ['Python', 'XGBoost', 'Scikit-learn', 'Pandas', 'Feature Engineering'],
     category: 'machine-learning',
     status: 'completed',
-    githubUrl: 'https://github.com/example/ml-recommendation',
+    githubUrl: 'https://github.com/mayankgulaty/mycodingjourney/tree/main/projects/dublin-bus-pipeline',
+    liveUrl: '/projects/case-studies/transit-delay-prediction',
     featured: true,
     complexity: 'advanced'
   },
   {
-    id: 'data-dashboard',
-    title: 'Interactive Data Dashboard',
-    description: 'Created a real-time analytics dashboard using React, D3.js, and FastAPI for visualizing business metrics.',
-    image: '/api/placeholder/400/300',
-    technologies: ['React', 'D3.js', 'FastAPI', 'PostgreSQL', 'WebSocket'],
-    category: 'web-development',
-    status: 'completed',
-    githubUrl: 'https://github.com/example/data-dashboard',
-    liveUrl: 'https://dashboard.example.com',
-    featured: true,
-    complexity: 'intermediate'
-  },
-  {
-    id: 'data-warehouse',
-    title: 'Cloud Data Warehouse',
-    description: 'Designed and implemented a cloud-based data warehouse using Snowflake and dbt for modern analytics.',
-    image: '/api/placeholder/400/300',
-    technologies: ['Snowflake', 'dbt', 'Airflow', 'S3', 'Terraform'],
-    category: 'data-engineering',
-    status: 'completed',
-    githubUrl: 'https://github.com/example/data-warehouse',
-    featured: false,
-    complexity: 'advanced'
-  },
-  {
-    id: 'monitoring-system',
-    title: 'Data Pipeline Monitoring',
-    description: 'Built a comprehensive monitoring system using Grafana, Prometheus, and custom alerting for data pipelines.',
-    image: '/api/placeholder/400/300',
-    technologies: ['Grafana', 'Prometheus', 'Python', 'Docker', 'Kubernetes'],
-    category: 'devops',
-    status: 'in-progress',
-    githubUrl: 'https://github.com/example/monitoring',
-    featured: false,
-    complexity: 'intermediate'
-  },
-  {
-    id: 'ab-testing',
-    title: 'A/B Testing Platform',
-    description: 'Developed a statistical analysis platform for A/B testing with automated experiment evaluation.',
-    image: '/api/placeholder/400/300',
-    technologies: ['Python', 'Pandas', 'Scipy', 'FastAPI', 'PostgreSQL'],
+    id: 'route-analysis',
+    title: 'Route Performance Analysis',
+    description: 'Comprehensive analysis of 198 Dublin bus routes identifying bottlenecks, best/worst performers, and optimization recommendations.',
+    image: '/blog-route-analysis.png',
+    technologies: ['Python', 'Pandas', 'Data Analysis', 'Visualization', 'Statistics'],
     category: 'analytics',
     status: 'completed',
-    githubUrl: 'https://github.com/example/ab-testing',
+    githubUrl: 'https://github.com/mayankgulaty/mycodingjourney/tree/main/projects/dublin-bus-pipeline',
+    liveUrl: '/projects/case-studies/route-optimization',
+    featured: true,
+    complexity: 'intermediate'
+  },
+  {
+    id: 'peak-hours-analysis',
+    title: 'Peak Hours Time Analysis',
+    description: 'Time-series analysis revealing when Dublin buses are most delayed, helping commuters optimize their travel times.',
+    image: '/blog-peak-hours.png',
+    technologies: ['Python', 'Pandas', 'Time Series', 'Plotly', 'Statistics'],
+    category: 'analytics',
+    status: 'completed',
+    githubUrl: 'https://github.com/mayankgulaty/mycodingjourney/tree/main/projects/dublin-bus-pipeline',
+    liveUrl: '/projects/case-studies/peak-hours-analysis',
     featured: false,
     complexity: 'intermediate'
   },
   {
-    id: 'stream-processing',
-    title: 'Real-time Stream Processing',
-    description: 'Implemented real-time data processing using Apache Flink and Apache Pulsar for event-driven architecture.',
-    image: '/api/placeholder/400/300',
-    technologies: ['Apache Flink', 'Apache Pulsar', 'Java', 'Docker', 'Kubernetes'],
-    category: 'data-engineering',
-    status: 'planned',
-    featured: false,
-    complexity: 'advanced'
-  },
-  {
-    id: 'feature-store',
-    title: 'ML Feature Store',
-    description: 'Built a centralized feature store using Feast for managing ML features across multiple models.',
-    image: '/api/placeholder/400/300',
-    technologies: ['Feast', 'Redis', 'PostgreSQL', 'Python', 'Docker'],
-    category: 'machine-learning',
-    status: 'in-progress',
-    githubUrl: 'https://github.com/example/feature-store',
-    featured: false,
-    complexity: 'advanced'
+    id: 'portfolio-website',
+    title: 'Full-Stack Portfolio Platform',
+    description: 'Modern portfolio website with custom CMS, blog system, dark mode, and 100 Lighthouse score built with Next.js and Supabase.',
+    image: '/portfolio-cover.png',
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Framer Motion'],
+    category: 'web-development',
+    status: 'completed',
+    githubUrl: 'https://github.com/mayankgulaty/mycodingjourney',
+    liveUrl: '/projects/case-studies/portfolio-website',
+    featured: true,
+    complexity: 'intermediate'
   }
 ]
 
 const categories = [
   { id: 'all', label: 'All Projects', count: projects.length },
   { id: 'data-engineering', label: 'Data Engineering', count: projects.filter(p => p.category === 'data-engineering').length },
-  { id: 'web-development', label: 'Web Development', count: projects.filter(p => p.category === 'web-development').length },
   { id: 'machine-learning', label: 'Machine Learning', count: projects.filter(p => p.category === 'machine-learning').length },
-  { id: 'devops', label: 'DevOps', count: projects.filter(p => p.category === 'devops').length },
-  { id: 'analytics', label: 'Analytics', count: projects.filter(p => p.category === 'analytics').length }
+  { id: 'analytics', label: 'Analytics', count: projects.filter(p => p.category === 'analytics').length },
+  { id: 'web-development', label: 'Web Development', count: projects.filter(p => p.category === 'web-development').length }
 ]
 
 const statuses = [
   { id: 'all', label: 'All Status', color: 'gray' },
-  { id: 'completed', label: 'Completed', color: 'green' },
-  { id: 'in-progress', label: 'In Progress', color: 'blue' },
-  { id: 'planned', label: 'Planned', color: 'yellow' }
+  { id: 'completed', label: 'Completed', color: 'green' }
 ]
 
 const complexities = [
   { id: 'all', label: 'All Levels', color: 'gray' },
-  { id: 'beginner', label: 'Beginner', color: 'green' },
   { id: 'intermediate', label: 'Intermediate', color: 'blue' },
   { id: 'advanced', label: 'Advanced', color: 'red' }
 ]
@@ -324,6 +288,13 @@ export function ProjectFilter() {
               <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 group-hover:scale-105">
                 {/* Project Image */}
                 <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
+                  {project.image && (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-black/20"></div>
                   <div className="absolute top-4 right-4 flex gap-2">
                     {project.featured && (

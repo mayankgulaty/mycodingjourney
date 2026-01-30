@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { Download, MapPin, Briefcase } from 'lucide-react'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
@@ -82,10 +83,24 @@ export default function AboutPage() {
               <p className="text-lg text-muted-foreground mb-8">
                 I&apos;m an experienced Data Engineer and Assistant Vice President with over 9 years of expertise in designing scalable data architectures and cloud solutions. I specialize in migrating legacy systems to modern cloud platforms like AWS and Snowflake, and building robust ETL pipelines.
               </p>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary">Available for work</Badge>
-                <Badge variant="outline">Open to collaboration</Badge>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <Badge variant="secondary" className="flex items-center gap-1">
+                  <Briefcase className="w-3 h-3" />
+                  Available for opportunities
+                </Badge>
+                <Badge variant="outline" className="flex items-center gap-1">
+                  <MapPin className="w-3 h-3" />
+                  Open to Remote & Relocation
+                </Badge>
               </div>
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors shadow-lg"
+              >
+                <Download className="w-4 h-4" />
+                Download Resume
+              </a>
             </motion.div>
 
             <motion.div variants={fadeInUp} className="relative">

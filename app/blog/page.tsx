@@ -31,22 +31,18 @@ export default async function BlogPage() {
             </p>
 
             {/* Blog Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              {[
-                { number: `${articles.length}`, label: 'Articles' },
-                { number: '5K+', label: 'Readers' },
-                { number: '3', label: 'Categories' },
-                { number: '100%', label: 'Original Content' }
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className="text-center p-4 glass-morphism rounded-2xl"
-                >
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                  <div className="text-sm text-foreground/70">{stat.label}</div>
+            {articles.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
+                <div className="text-center px-6 py-3 glass-morphism rounded-2xl">
+                  <span className="text-2xl font-bold text-primary">{articles.length}</span>
+                  <span className="text-sm text-foreground/70 ml-2">Articles</span>
                 </div>
-              ))}
-            </div>
+                <div className="text-center px-6 py-3 glass-morphism rounded-2xl">
+                  <span className="text-sm text-foreground/70">Topics: </span>
+                  <span className="text-sm font-medium text-foreground">Data Engineering, System Design, Full-Stack</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </Section>
@@ -85,18 +81,13 @@ export default async function BlogPage() {
                       {/* Tags */}
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
                         {article.tags.slice(0, 2).map((tag) => (
-                          <Link
+                          <Badge
                             key={tag}
-                            href={`/blog/tag/${encodeURIComponent(tag)}`}
-                            onClick={(e) => e.stopPropagation()}
+                            variant="outline"
+                            className="text-xs border-purple-300 text-purple-700 dark:border-purple-500 dark:text-purple-400"
                           >
-                            <Badge
-                              variant="outline"
-                              className="text-xs border-purple-300 text-purple-700 dark:border-purple-500 dark:text-purple-400 hover:bg-purple-100 hover:border-purple-500 dark:hover:bg-purple-900/40 transition-colors cursor-pointer"
-                            >
-                              {tag}
-                            </Badge>
-                          </Link>
+                            {tag}
+                          </Badge>
                         ))}
                         {article.featured && (
                           <Badge className="text-xs bg-yellow-500 text-white">
