@@ -254,7 +254,7 @@ export function LiveCodeEditor() {
               <textarea
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className="w-full h-96 bg-transparent text-green-400 font-mono text-sm resize-none outline-none"
+                className="w-full h-96 bg-transparent text-green-400 font-mono text-sm resize-none outline-hidden"
                 placeholder="Enter your code here..."
                 spellCheck={false}
               />

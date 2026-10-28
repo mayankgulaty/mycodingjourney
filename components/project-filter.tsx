@@ -285,9 +285,9 @@ export function ProjectFilter() {
               transition={{ duration: 0.3, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
             >
-              <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 group-hover:scale-105">
+              <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs transition-all duration-500 group-hover:scale-105">
                 {/* Project Image */}
-                <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
+                <div className="relative h-48 bg-linear-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
                   {project.image && (
                     <img 
                       src={project.image} 

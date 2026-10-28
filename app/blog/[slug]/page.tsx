@@ -162,7 +162,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="w-full h-full object-cover"
               style={{ objectPosition: article.cover_image_position || '50% 50%' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
           </div>
         )}
 
@@ -216,9 +216,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Section>
 
         {/* Author Bio */}
-        <Section className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+        <Section className="bg-linear-to-r from-purple-500/10 to-pink-500/10">
           <div className="container max-w-4xl">
-            <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm">
+            <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs">
               <div className="p-8">
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-500/30">
@@ -376,9 +376,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </Section>
 
       {/* Author Bio */}
-      <Section className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+      <Section className="bg-linear-to-r from-purple-500/10 to-pink-500/10">
         <div className="container max-w-4xl">
-          <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm">
+          <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs">
             <div className="p-8">
               <div className="flex items-start gap-6">
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-500/30">

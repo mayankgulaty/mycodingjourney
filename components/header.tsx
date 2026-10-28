@@ -36,7 +36,7 @@ export function Header() {
   return (
     <motion.header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${mounted && isScrolled
-        ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-sm'
+        ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-xs'
         : 'bg-transparent'
         }`}
       initial={{ y: -100 }}
@@ -69,7 +69,7 @@ export function Header() {
             <NavLink href="/contact">Contact</NavLink>
           </nav>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-4">
             <a
               href="/resume.pdf"
               download

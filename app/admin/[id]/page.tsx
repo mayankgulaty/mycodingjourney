@@ -514,7 +514,7 @@ export default function EditArticlePage() {
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             {/* Header */}
-            <header className="bg-white dark:bg-gray-800 shadow sticky top-0 z-10">
+            <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <button
@@ -621,7 +621,7 @@ export default function EditArticlePage() {
                 <div className={`grid gap-6 ${showPreview ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
                     {/* Editor */}
                     <div className={showPreview ? 'lg:col-span-1' : 'lg:col-span-2'}>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
                             <div className="mb-4">
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Content (Markdown)
@@ -658,7 +658,7 @@ export default function EditArticlePage() {
                     {/* Preview */}
                     {showPreview && (
                         <div className="lg:col-span-1">
-                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 sticky top-20 max-h-[80vh] overflow-y-auto">
+                            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 sticky top-20 max-h-[80vh] overflow-y-auto">
                                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4">Preview</h3>
                                 <div
                                     className="prose prose-sm dark:prose-invert max-w-none"
@@ -672,7 +672,7 @@ export default function EditArticlePage() {
 
                     {/* Metadata */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 space-y-4 sticky top-20">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 space-y-4 sticky top-20">
                             <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Metadata</h3>
 
                             <div>

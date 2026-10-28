@@ -43,7 +43,7 @@ export function DataPipeline() {
   }, [currentStep, steps.length])
 
   return (
-    <div className="w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 relative overflow-hidden">
+    <div className="w-full bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <svg width="100%" height="100%" className="w-full h-full">
@@ -115,7 +115,7 @@ export function DataPipeline() {
               {/* Connection line */}
               {index < steps.length - 1 && (
                 <motion.div
-                  className="absolute top-8 left-1/2 w-full h-0.5 bg-gradient-to-r from-gray-600 to-gray-600"
+                  className="absolute top-8 left-1/2 w-full h-0.5 bg-linear-to-r from-gray-600 to-gray-600"
                   style={{ width: 'calc(100% - 4rem)', left: 'calc(50% + 2rem)' }}
                   animate={{
                     background: step.status === 'completed' 

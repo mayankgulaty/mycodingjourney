@@ -160,7 +160,7 @@ export default function CaseStudiesPage() {
                       {/* Left: Project Info */}
                       <div className="lg:col-span-2">
                         <div className="flex items-start gap-4 mb-6">
-                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white">
+                          <div className="w-16 h-16 bg-linear-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white">
                             {study.icon}
                           </div>
                           <div>
@@ -254,7 +254,7 @@ export default function CaseStudiesPage() {
       </Section>
 
       {/* CTA */}
-      <Section className="py-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+      <Section className="py-16 bg-linear-to-r from-purple-500/10 to-pink-500/10">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Want to discuss a similar project?

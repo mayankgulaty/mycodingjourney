@@ -93,7 +93,7 @@ export function MultiLineTypewriter({
 
   return (
     <div className="text-center">
-      <span className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+      <span className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">
         {currentText}
         <motion.span
           animate={{ opacity: [0, 1, 0] }}
@@ -136,7 +136,7 @@ export function MorphingShapes() {
         <motion.path
           d={shapes[currentShape].d}
           fill="currentColor"
-          className={`bg-gradient-to-r ${shapes[currentShape].color} bg-clip-text text-transparent`}
+          className={`bg-linear-to-r ${shapes[currentShape].color} bg-clip-text text-transparent`}
           animate={{ d: shapes[currentShape].d }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         />
@@ -164,7 +164,7 @@ export function ScrollProgress() {
   return (
     <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50">
       <motion.div
-        className="h-full bg-gradient-to-r from-blue-500 to-purple-600"
+        className="h-full bg-linear-to-r from-blue-500 to-purple-600"
         style={{ width: `${scrollProgress}%` }}
         initial={{ width: 0 }}
         animate={{ width: `${scrollProgress}%` }}

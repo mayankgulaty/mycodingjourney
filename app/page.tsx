@@ -52,7 +52,7 @@ export default function HomePage() {
         <FloatingParticles />
 
         {/* Background Gradient Mesh */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100/40 via-background to-background dark:from-blue-900/20 dark:via-slate-950 dark:to-slate-950 -z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-blue-100/40 via-background to-background dark:from-blue-900/20 dark:via-slate-950 dark:to-slate-950 -z-10" />
 
         <div className="container relative z-10 text-center px-4">
           <motion.div
@@ -62,7 +62,7 @@ export default function HomePage() {
             className="mb-8 flex justify-center"
           >
             <div className="relative">
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 blur opacity-30 animate-pulse"></div>
+              <div className="absolute -inset-1 rounded-full bg-linear-to-r from-cyan-400 to-indigo-600 blur-sm opacity-30 animate-pulse"></div>
               <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-border shadow-2xl">
                 {/* Direct img tag as fallback/alternative if ProfilePhoto isn't imported yet, or we can use ProfilePhoto if imported */}
                 <img src="/me.jpg" alt="Mayank" className="w-full h-full object-cover" style={{ objectPosition: 'center 30%' }} />
@@ -76,7 +76,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8 flex justify-center"
           >
-            <span className="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 text-sm font-medium backdrop-blur-sm">
+            <span className="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 text-sm font-medium backdrop-blur-xs">
               Available for Data Engineering & Full-stack Roles
             </span>
           </motion.div>
@@ -143,7 +143,7 @@ export default function HomePage() {
       </Section>
 
       {/* Skills Marquee */}
-      <div className="border-y border-border bg-muted/50 backdrop-blur-sm py-8 overflow-hidden">
+      <div className="border-y border-border bg-muted/50 backdrop-blur-xs py-8 overflow-hidden">
         <div className="container">
           <p className="text-center text-muted-foreground text-sm uppercase tracking-wider mb-6 font-semibold">Technologies I work with</p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
@@ -177,7 +177,7 @@ export default function HomePage() {
               <RevealOnScroll key={idx} delay={idx * 0.1}>
                 <TiltCard className="h-full">
                   <div className="glass-card h-full p-8 flex flex-col hover:border-blue-500/30 group">
-                    <div className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 w-fit group-hover:scale-110 transition-transform duration-500 border border-border">
+                    <div className="mb-6 p-4 rounded-2xl bg-linear-to-br from-blue-500/10 to-purple-500/10 w-fit group-hover:scale-110 transition-transform duration-500 border border-border">
                       {project.icon}
                     </div>
 
@@ -185,7 +185,7 @@ export default function HomePage() {
                       {project.title}
                     </h3>
 
-                    <p className="text-muted-foreground leading-relaxed mb-8 flex-grow">
+                    <p className="text-muted-foreground leading-relaxed mb-8 grow">
                       {project.description}
                     </p>
 
@@ -218,7 +218,7 @@ export default function HomePage() {
       </Section>
 
       {/* Interactive Pipeline Demo - "Innovative" Feature */}
-      <Section className="bg-gradient-to-b from-background to-muted/30 border-t border-border">
+      <Section className="bg-linear-to-b from-background to-muted/30 border-t border-border">
         <div className="container">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-300 text-xs font-bold uppercase tracking-wider mb-4">
@@ -231,7 +231,7 @@ export default function HomePage() {
           </div>
 
           {/* Wrap the component to handle dark mode styles properly */}
-          <div className="bg-card border border-border rounded-3xl overflow-hidden p-6 backdrop-blur-sm shadow-xl">
+          <div className="bg-card border border-border rounded-3xl overflow-hidden p-6 backdrop-blur-xs shadow-xl">
             <InteractivePipeline />
           </div>
         </div>

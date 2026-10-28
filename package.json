@@ -22,18 +22,18 @@
     "reading-time": "^1.5.0",
     "shiki": "^4.5.0",
     "slugify": "^1.6.9",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/mdx": "^2.0.14",
     "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "autoprefixer": "^10.6.2",
     "eslint": "^10.13.0",
     "eslint-config-next": "^16.4.3",
     "postcss": "^8.5.32",
-    "tailwindcss": "^3.3.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   },
   "engines": {

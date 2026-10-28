@@ -37,7 +37,7 @@ export default function DelayPredictionCaseStudy() {
             </Link>
 
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white">
+              <div className="w-16 h-16 bg-linear-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white">
                 <Brain className="w-8 h-8" />
               </div>
               <div>
@@ -195,7 +195,7 @@ export default function DelayPredictionCaseStudy() {
 
           {/* Results */}
           <motion.div {...fadeInUp}>
-            <Card className="p-8 mb-12 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20">
+            <Card className="p-8 mb-12 bg-linear-to-r from-green-500/10 to-emerald-500/10 border-green-500/20">
               <h2 className="text-2xl font-bold mb-6 text-foreground flex items-center gap-3">
                 <TrendingUp className="w-6 h-6 text-green-500" />
                 Results
@@ -282,7 +282,7 @@ export default function DelayPredictionCaseStudy() {
 
           {/* Code Link */}
           <motion.div {...fadeInUp}>
-            <Card className="p-8 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border-purple-500/20">
+            <Card className="p-8 bg-linear-to-r from-purple-500/10 to-indigo-500/10 border-purple-500/20">
               <h2 className="text-2xl font-bold mb-4 text-foreground">Explore the Code</h2>
               <p className="text-foreground/70 mb-6">
                 Full implementation including feature engineering, model training, 
@@ -303,7 +303,7 @@ export default function DelayPredictionCaseStudy() {
       </Section>
 
       {/* Related */}
-      <Section className="py-16 bg-gradient-to-r from-purple-500/10 to-indigo-500/10">
+      <Section className="py-16 bg-linear-to-r from-purple-500/10 to-indigo-500/10">
         <div className="container text-center">
           <h2 className="text-3xl font-bold mb-8 text-foreground">Related Case Studies</h2>
           <div className="flex flex-wrap justify-center gap-4">

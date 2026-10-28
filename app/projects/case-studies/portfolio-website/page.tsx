@@ -74,23 +74,23 @@ export default function PortfolioWebsiteCaseStudy() {
               </p>
               <ul className="space-y-3 text-foreground/80">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
                   <span><strong>Showcase technical depth</strong> - Not just list skills, but demonstrate them through the site itself</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
                   <span><strong>Host detailed case studies</strong> - With code samples, architecture diagrams, and real metrics</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
                   <span><strong>Publish technical blogs</strong> - To share knowledge and improve discoverability</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
                   <span><strong>Be maintainable</strong> - Easy to update without touching code every time</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
                   <span><strong>Load fast everywhere</strong> - Performance is a feature, especially for technical audiences</span>
                 </li>
               </ul>
@@ -243,7 +243,7 @@ export default function PortfolioWebsiteCaseStudy() {
                   tech: ['Next/Image', 'Dynamic Imports', 'ISR']
                 }
               ].map((feature, idx) => (
-                <div key={idx} className="p-6 rounded-xl bg-gradient-to-br from-purple-500/5 to-pink-500/5 border border-purple-500/10">
+                <div key={idx} className="p-6 rounded-xl bg-linear-to-br from-purple-500/5 to-pink-500/5 border border-purple-500/10">
                   <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
                   <p className="text-foreground/70 text-sm mb-4">{feature.description}</p>
                   <div className="flex flex-wrap gap-2">
@@ -295,7 +295,7 @@ export default function PortfolioWebsiteCaseStudy() {
                   'CSS-in-JS with zero runtime (Tailwind)'
                 ].map((technique, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-foreground/80">
-                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
                     <span className="text-sm">{technique}</span>
                   </div>
                 ))}
@@ -385,7 +385,7 @@ export default function PortfolioWebsiteCaseStudy() {
           </Card>
 
           {/* Links */}
-          <Card className="p-8 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/20">
+          <Card className="p-8 bg-linear-to-r from-purple-500/10 to-pink-500/10 border-purple-500/20">
             <h2 className="text-2xl font-bold mb-6 text-foreground">Explore the Project</h2>
             
             <div className="flex flex-wrap gap-4">

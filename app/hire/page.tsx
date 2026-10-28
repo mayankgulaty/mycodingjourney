@@ -222,7 +222,7 @@ export default function HireMePage() {
               <div className="space-y-4">
                 {whatIBring.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
                     <span className="text-foreground/80">{item}</span>
                   </div>
                 ))}
@@ -240,7 +240,7 @@ export default function HireMePage() {
               <div className="space-y-4">
                 {idealCompany.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <Briefcase className="w-5 h-5 text-purple-500 mt-0.5 flex-shrink-0" />
+                    <Briefcase className="w-5 h-5 text-purple-500 mt-0.5 shrink-0" />
                     <span className="text-foreground/80">{item}</span>
                   </div>
                 ))}
@@ -251,7 +251,7 @@ export default function HireMePage() {
       </Section>
 
       {/* Connect */}
-      <Section className="py-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+      <Section className="py-16 bg-linear-to-r from-purple-500/10 to-pink-500/10">
         <div className="container">
           <motion.div
             className="max-w-3xl mx-auto text-center"

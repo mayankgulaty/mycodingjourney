@@ -45,7 +45,7 @@ export default function RouteOptimizationCaseStudy() {
             </Link>
 
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center text-white">
+              <div className="w-16 h-16 bg-linear-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center text-white">
                 <Route className="w-8 h-8" />
               </div>
               <div>
@@ -280,7 +280,7 @@ export default function RouteOptimizationCaseStudy() {
       </Section>
 
       {/* CTA */}
-      <Section className="py-16 bg-gradient-to-r from-blue-500/10 to-cyan-500/10">
+      <Section className="py-16 bg-linear-to-r from-blue-500/10 to-cyan-500/10">
         <div className="container text-center">
           <h2 className="text-3xl font-bold mb-8 text-foreground">Related Case Studies</h2>
           <div className="flex flex-wrap justify-center gap-4">

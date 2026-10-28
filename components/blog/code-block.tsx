@@ -106,7 +106,7 @@ export function CodeBlock({
                                     className={`flex ${isHighlighted ? 'bg-blue-500/20 -mx-4 px-4 border-l-2 border-blue-400' : ''}`}
                                 >
                                     {showLineNumbers && (
-                                        <span className="select-none text-gray-600 w-8 text-right mr-4 flex-shrink-0">
+                                        <span className="select-none text-gray-600 w-8 text-right mr-4 shrink-0">
                                             {lineNumber}
                                         </span>
                                     )}
