@@ -1,14 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowLeft, Database, MapPin, Clock, TrendingUp, Bus, Wifi, BarChart3, Github, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Database, MapPin, Clock, TrendingUp, Bus, Wifi, BarChart3, ExternalLink } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
 import { DublinBusDashboard } from '@/components/dublin-bus-dashboard'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 40 },
   animate: { 
     opacity: 1, 

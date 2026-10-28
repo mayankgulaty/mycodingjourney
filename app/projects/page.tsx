@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
@@ -11,7 +11,7 @@ import { LiveCodeEditor } from '@/components/live-code-editor'
 import { DataVisualization } from '@/components/data-visualization'
 import { FloatingParticles } from '@/components/enhanced-animations'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 60 },
   animate: { 
     opacity: 1, 
@@ -20,7 +20,7 @@ const fadeInUp = {
   }
 }
 
-const stagger = {
+const stagger: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.1

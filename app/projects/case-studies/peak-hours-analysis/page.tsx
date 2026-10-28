@@ -1,13 +1,14 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowLeft, Clock, Sun, Moon, TrendingUp, BarChart3, Github, Calendar, Users } from 'lucide-react'
+import { ArrowLeft, Clock, Sun, Moon, TrendingUp, BarChart3, Calendar, Users } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 40 },
   animate: { 
     opacity: 1, 

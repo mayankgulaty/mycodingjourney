@@ -17,9 +17,9 @@ import { siteConfig } from '@/lib/site'
 const USE_SUPABASE = process.env.NEXT_PUBLIC_SUPABASE_URL ? true : false
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export const revalidate = 60 // Revalidate every 60 seconds
@@ -36,8 +36,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params
   if (USE_SUPABASE) {
-    const article = await getArticleBySlug(params.slug)
+    const article = await getArticleBySlug(slug)
 
     if (!article) {
       return { title: 'Post Not Found' }
@@ -72,7 +73,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   // Fallback to static posts
-  const post = getPostBySlug(params.slug)
+  const post = getPostBySlug(slug)
 
   if (!post) {
     return { title: 'Post Not Found' }
@@ -120,8 +121,9 @@ function generateArticleJsonLd(article: { title: string; excerpt?: string | null
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params
   if (USE_SUPABASE) {
-    const article = await getArticleBySlug(params.slug)
+    const article = await getArticleBySlug(slug)
 
     if (!article) {
       notFound()
@@ -313,7 +315,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Fallback: Use static posts (original implementation)
   const { parseMarkdown } = await import('@/lib/markdown')
-  const post = getPostBySlug(params.slug)
+  const post = getPostBySlug(slug)
 
   if (!post) {
     notFound()

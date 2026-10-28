@@ -9,9 +9,9 @@ import { Section } from '@/components/section'
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react'
 
 interface TagPageProps {
-    params: {
+    params: Promise<{
         tag: string
-    }
+    }>
 }
 
 export const revalidate = 60
@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
-    const tag = decodeURIComponent(params.tag)
+    const { tag: rawTag } = await params
+    const tag = decodeURIComponent(rawTag)
     return {
         title: `Articles tagged "${tag}"`,
         description: `Browse all articles about ${tag} on My Coding Journey`,
@@ -30,7 +31,8 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-    const tag = decodeURIComponent(params.tag)
+    const { tag: rawTag } = await params
+    const tag = decodeURIComponent(rawTag)
 
     const { data: articles, total } = await getPublishedArticles({
         tag,

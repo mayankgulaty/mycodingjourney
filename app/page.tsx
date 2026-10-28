@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Code, Database, Globe, Layers, Layout, Terminal, Send, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Code, Database, Globe, Layers, Layout, Terminal, Send, Mail } from 'lucide-react'
+import { Github, Linkedin } from '@/components/brand-icons'
 import { Section } from '@/components/section'
 import { InteractivePipeline } from '@/components/interactive-pipeline'
 import { FloatingParticles, MultiLineTypewriter, TiltCard, RevealOnScroll } from '@/components/enhanced-animations'

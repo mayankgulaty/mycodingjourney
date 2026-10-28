@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowLeft, Code, Zap, Shield, Palette, Database, Globe, CheckCircle, ExternalLink, Github } from 'lucide-react'
+import { ArrowLeft, Code, Zap, Shield, Palette, Database, Globe, CheckCircle, ExternalLink } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'

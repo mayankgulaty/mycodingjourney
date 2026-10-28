@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 interface SectionProps {
@@ -9,7 +9,7 @@ interface SectionProps {
   id?: string
 }
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 60 },
   animate: { 
     opacity: 1, 

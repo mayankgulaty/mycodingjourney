@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, useAnimation, useInView } from 'framer-motion'
+import { motion, useAnimation, useInView, type Variants } from 'framer-motion'
 
 // Floating Particles Animation
 export function FloatingParticles() {
@@ -277,7 +277,7 @@ export function RevealOnScroll({
     }
   }, [isInView, controls])
 
-  const variants = {
+  const variants: Variants = {
     hidden: {
       opacity: 0,
       x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,

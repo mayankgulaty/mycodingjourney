@@ -1,29 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
-import { 
-  MapPin, 
-  Calendar, 
-  Briefcase, 
-  CheckCircle, 
-  Download, 
-  Mail, 
-  Linkedin, 
-  Github,
-  Clock,
-  Globe,
-  Building,
-  Code,
-  Database,
-  Cloud
-} from 'lucide-react'
+import { MapPin, Calendar, Briefcase, CheckCircle, Download, Mail, Clock, Globe, Building, Code, Database, Cloud } from 'lucide-react'
+import { Linkedin, Github } from '@/components/brand-icons'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
 import { siteConfig } from '@/lib/site'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 40 },
   animate: { 
     opacity: 1, 
@@ -32,7 +18,7 @@ const fadeInUp = {
   }
 }
 
-const stagger = {
+const stagger: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.1

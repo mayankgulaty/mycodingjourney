@@ -40,6 +40,8 @@ const securityHeaders = [
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   poweredByHeader: false,
+  // next-mdx-remote must be bundled (not externalised) so it shares Next's React copy in the App Router.
+  transpilePackages: ['next-mdx-remote'],
   experimental: {
     mdxRs: true,
   },
