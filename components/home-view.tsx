@@ -136,12 +136,31 @@ export function HomeView({ posts }: { posts: HomePost[] }) {
             </Link>
           </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-8 flex justify-center"
+          >
+            <Link
+              href="/playground"
+              className="group inline-flex items-center gap-3 rounded-xl border border-primary/40 bg-primary/10 px-6 py-3 font-mono text-sm text-primary shadow-sm transition hover:bg-primary/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <Terminal className="h-4 w-4" aria-hidden />
+              <span>
+                <span className="opacity-60">$</span> ./enter-the-playground
+              </span>
+              <span className="rounded bg-primary/20 px-1.5 py-0.5 text-[10px] uppercase tracking-wider">new</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </Link>
+          </motion.div>
+
           {/* Social Proof / Links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-            className="mt-16 flex gap-6 justify-center text-muted-foreground"
+            className="mt-12 flex gap-6 justify-center text-muted-foreground"
           >
             <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Github className="w-6 h-6" /></a>
             <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors"><Linkedin className="w-6 h-6" /></a>
@@ -268,7 +287,7 @@ export function HomeView({ posts }: { posts: HomePost[] }) {
                     <h3 className="text-xl font-semibold group-hover:text-blue-500 transition-colors">{post.title}</h3>
                   </div>
                   <div className="mt-4 sm:mt-0 flex items-center text-sm text-muted-foreground gap-4">
-                    {post.readingTime ? <span>{post.readingTime} min read</span> : null}
+                    {post.readingTime ? <span className="whitespace-nowrap">{post.readingTime} min read</span> : null}
                     <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-blue-500" />
                   </div>
                 </article>

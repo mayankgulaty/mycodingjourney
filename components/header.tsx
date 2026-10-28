@@ -65,6 +65,7 @@ export function Header() {
             <NavLink href="/about">About</NavLink>
             <NavLink href="/projects">Projects</NavLink>
             <NavLink href="/blog">Blog</NavLink>
+            <NavLink href="/playground">Playground</NavLink>
             <NavLink href="/hire">Hire Me</NavLink>
             <NavLink href="/contact">Contact</NavLink>
           </nav>
@@ -152,6 +153,13 @@ export function Header() {
                     onClick={closeMobileMenu}
                   >
                     Blog
+                  </Link>
+                  <Link
+                    href="/playground"
+                    className="text-foreground/80 hover:text-foreground transition-colors py-2"
+                    onClick={closeMobileMenu}
+                  >
+                    Playground
                   </Link>
                   <Link
                     href="/hire"
