@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPublishedArticles, getAllTags } from '@/lib/articles'
 import { formatDate } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
 import { Badge } from '@/components/badge'
 import { Card } from '@/components/card'
 import { Section } from '@/components/section'
@@ -24,10 +25,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
     const { tag: rawTag } = await params
     const tag = decodeURIComponent(rawTag)
-    return {
+    return pageMetadata({
         title: `Articles tagged "${tag}"`,
-        description: `Browse all articles about ${tag} on My Coding Journey`,
-    }
+        description: `Browse all articles about ${tag} by Mayank Gulaty.`,
+        path: `/blog/tag/${encodeURIComponent(tag)}`,
+    })
 }
 
 export default async function TagPage({ params }: TagPageProps) {

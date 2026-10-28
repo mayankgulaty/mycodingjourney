@@ -36,7 +36,7 @@ const projects: Project[] = [
   {
     id: 'transit-delay-prediction',
     title: 'Transit Delay Prediction ML',
-    description: 'Machine learning model predicting bus delays 15 minutes in advance with 87% accuracy using XGBoost and feature engineering.',
+    description: 'Machine learning model predicting bus delays 15 minutes in advance using XGBoost and feature engineering.',
     image: '/blog-ml-delay-prediction.png',
     technologies: ['Python', 'XGBoost', 'Scikit-learn', 'Pandas', 'Feature Engineering'],
     category: 'machine-learning',
@@ -75,7 +75,7 @@ const projects: Project[] = [
   {
     id: 'portfolio-website',
     title: 'Full-Stack Portfolio Platform',
-    description: 'Modern portfolio website with custom CMS, blog system, dark mode, and 100 Lighthouse score built with Next.js and Supabase.',
+    description: 'Modern portfolio website with custom CMS, blog system and dark mode, built with Next.js and Supabase.',
     image: '/portfolio-cover.png',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Framer Motion'],
     category: 'web-development',

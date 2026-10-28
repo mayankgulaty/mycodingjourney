@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "mycodingjourney",
   title: "Mayank Gulaty | Data Engineer & Full-Stack Developer",
-  description: "Senior Data Engineer with 8+ years of experience building scalable data pipelines and full-stack applications. Expertise in Apache Spark, Python, AWS, and modern web technologies.",
-  url: "https://mycodingjourney.com",
-  ogImage: "https://mycodingjourney.com/og-image.png",
+  description: "Data engineer and full-stack developer. Data pipelines, Apache Spark, Python, AWS and modern web. Blog, projects and a hackable desktop-OS playground.",
+  url: "https://www.mycodingjourney.com",
+  ogImage: "https://www.mycodingjourney.com/og-image.png",
   links: {
     twitter: "https://twitter.com/mayaborjar",
     github: "https://github.com/mayankgulaty",
@@ -12,7 +12,7 @@ export const siteConfig = {
   author: {
     name: "Mayank Gulaty",
     email: "mayankgulaty@gmail.com",
-    bio: "Senior Data Engineer with 8+ years of experience at Citi and Nagarro, specializing in building petabyte-scale data pipelines and cloud-native architectures. I combine deep data engineering expertise with full-stack development skills to create end-to-end solutions.",
+    bio: "Senior Data Engineer with experience at Citi and Nagarro, building data pipelines and cloud-native architectures. I combine data engineering with full-stack development to build end-to-end solutions.",
     avatar: "/avatar.jpg",
     location: "Open to Remote & Relocation",
     availability: "Open to opportunities",

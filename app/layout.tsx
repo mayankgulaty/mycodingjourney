@@ -12,10 +12,12 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    template: `%s | ${siteConfig.author.name}`,
   },
+  alternates: { canonical: './' },
   description: siteConfig.description,
   keywords: ['developer', 'portfolio', 'blog', 'coding', 'programming'],
   authors: [{ name: siteConfig.author.name }],
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: siteConfig.url,
+    url: '/',
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.name,
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: '@mycodingjourney',
+    creator: '@mayaborjar',
   },
   robots: {
     index: true,
@@ -53,9 +55,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
   },
 }
 

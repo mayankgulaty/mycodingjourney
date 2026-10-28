@@ -62,9 +62,9 @@ export default function HireMePage() {
   ]
 
   const whatIBring = [
-    '8+ years of hands-on experience in data engineering and software development',
+    'Hands-on experience in data engineering and software development',
     'Proven track record migrating legacy systems to modern cloud architectures',
-    'Experience at Fortune 500 companies (Citi) with enterprise-scale systems',
+    'Enterprise experience at Citi working on large-scale systems',
     'Rare combination of data engineering depth + full-stack development skills',
     'Strong communication skills - can translate technical concepts for stakeholders',
     'Self-starter who thrives in ambiguous situations'

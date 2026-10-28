@@ -81,7 +81,7 @@ export default function AboutPage() {
                 {siteConfig.author.bio}
               </p>
               <p className="text-lg text-muted-foreground mb-8">
-                I&apos;m an experienced Data Engineer and Assistant Vice President with over 9 years of expertise in designing scalable data architectures and cloud solutions. I specialize in migrating legacy systems to modern cloud platforms like AWS and Snowflake, and building robust ETL pipelines.
+                I&apos;m an experienced Data Engineer and Assistant Vice President with deep expertise in designing scalable data architectures and cloud solutions. I specialize in migrating legacy systems to modern cloud platforms like AWS and Snowflake, and building robust ETL pipelines.
               </p>
               <div className="flex flex-wrap gap-3 mb-6">
                 <Badge variant="secondary" className="flex items-center gap-1">

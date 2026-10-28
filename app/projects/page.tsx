@@ -63,10 +63,10 @@ export default function ProjectsPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               {[
-                { number: '8+', label: 'Years Experience' },
-                { number: '10B+', label: 'Records Processed' },
-                { number: '15+', label: 'Technologies' },
-                { number: '2', label: 'Fortune 500 Companies' }
+                { number: '5', label: 'Case Studies' },
+                { number: 'GTFS-RT', label: 'Live Data Source' },
+                { number: 'Python', label: 'Primary Language' },
+                { number: 'AWS', label: 'Cloud of Choice' }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -160,7 +160,7 @@ export default function ProjectsPage() {
                   </div>
                 </div>
                 <p className="text-foreground/80 mb-6 leading-relaxed">
-                  ML model predicting bus delays 15 minutes in advance with 87% accuracy, 
+                  ML model predicting bus delays 15 minutes in advance, 
                   using feature engineering on real-time transit data.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">

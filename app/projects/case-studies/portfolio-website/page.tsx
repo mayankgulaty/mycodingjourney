@@ -44,10 +44,10 @@ export default function PortfolioWebsiteCaseStudy() {
             {/* Key Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
               {[
-                { value: '100', label: 'Lighthouse Score' },
-                { value: '<1s', label: 'Load Time' },
-                { value: 'SSR', label: 'Server Rendering' },
-                { value: 'A+', label: 'SEO Grade' }
+                { value: 'Next 16', label: 'Framework' },
+        { value: 'SSR', label: 'Server Rendering' },
+        { value: 'MDX', label: 'Blog Engine' },
+        { value: 'Supabase', label: 'Content Store' }
               ].map((metric, idx) => (
                 <div key={idx} className="text-center p-4 glass-morphism rounded-xl">
                   <div className="text-2xl font-bold text-purple-500 mb-1">{metric.value}</div>
