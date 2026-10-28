@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://www.mycodingjourney.com",
   ogImage: "https://www.mycodingjourney.com/og-image.png",
   links: {
-    twitter: "https://twitter.com/mayaborjar",
+    twitter: "https://x.com/mgulaty",
     github: "https://github.com/mayankgulaty",
     linkedin: "https://linkedin.com/in/mayankgulaty",
   },
