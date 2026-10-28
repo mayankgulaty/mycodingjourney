@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { Suspense, useState, useEffect, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import {
     Plus,
@@ -24,7 +24,16 @@ import {
 import type { Article } from '@/lib/types'
 import { useToast } from '@/components/toast'
 
-export default function AdminDashboard() {
+// Next 14.2+ requires useSearchParams() consumers to sit under a Suspense boundary
+export default function AdminDashboardPage() {
+    return (
+        <Suspense fallback={null}>
+            <AdminDashboard />
+        </Suspense>
+    )
+}
+
+function AdminDashboard() {
     const { success, error: showError } = useToast()
     const [articles, setArticles] = useState<Article[]>([])
     const [loading, setLoading] = useState(true)

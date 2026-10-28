@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAdminRequest } from '@/lib/admin-auth'
 import {
     getPublishedArticles,
     getAllArticles,
@@ -7,23 +8,18 @@ import {
 } from '@/lib/articles'
 import type { ArticleInput } from '@/lib/types'
 
-// Verify admin password
+// Verify admin password (constant-time, fails closed if unset)
 function isAuthorized(request: NextRequest): boolean {
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) return false
-
-    const [type, token] = authHeader.split(' ')
-    if (type !== 'Bearer') return false
-
-    return token === process.env.ADMIN_PASSWORD
+    return isAdminRequest(request)
 }
 
 // GET /api/articles - List articles
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const all = searchParams.get('all') === 'true'
-    const page = parseInt(searchParams.get('page') || '1')
-    const pageSize = parseInt(searchParams.get('pageSize') || '10')
+    // Clamp pagination inputs so a caller cannot request unbounded pages
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1') || 1)
+    const pageSize = Math.min(50, Math.max(1, parseInt(searchParams.get('pageSize') || '10') || 10))
     const tag = searchParams.get('tag') || undefined
     const featured = searchParams.get('featured') === 'true' ? true : undefined
 

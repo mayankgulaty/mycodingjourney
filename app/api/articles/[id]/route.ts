@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAdminRequest } from '@/lib/admin-auth'
 import { getArticleById, updateArticle, deleteArticle } from '@/lib/articles'
 
-// Verify admin password
+// Verify admin password (constant-time, fails closed if unset)
 function isAuthorized(request: NextRequest): boolean {
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) return false
-
-    const [type, token] = authHeader.split(' ')
-    if (type !== 'Bearer') return false
-
-    return token === process.env.ADMIN_PASSWORD
+    return isAdminRequest(request)
 }
 
 // GET /api/articles/[id] - Get single article by ID
