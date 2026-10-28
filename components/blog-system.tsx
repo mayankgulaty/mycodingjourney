@@ -341,8 +341,8 @@ export function BlogSystem() {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 group-hover:scale-105">
-                  <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
+                <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs transition-all duration-500 group-hover:scale-105">
+                  <div className="relative h-48 bg-linear-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="absolute top-4 right-4">
                       <Badge className="bg-yellow-500 text-white">Featured</Badge>
@@ -413,8 +413,8 @@ export function BlogSystem() {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 group-hover:scale-105">
-                  <div className="relative h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
+                <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs transition-all duration-500 group-hover:scale-105">
+                  <div className="relative h-32 bg-linear-to-br from-blue-500 to-purple-600 rounded-t-lg overflow-hidden">
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="absolute top-2 right-2">
                       <Badge className={getDifficultyColor(post.difficulty)}>

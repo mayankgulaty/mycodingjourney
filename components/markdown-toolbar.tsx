@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 
 interface MarkdownToolbarProps {
-    textareaRef: React.RefObject<HTMLTextAreaElement>
+    textareaRef: React.RefObject<HTMLTextAreaElement | null>
     onContentChange: (content: string) => void
     content: string
 }

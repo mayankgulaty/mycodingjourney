@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
@@ -11,7 +11,7 @@ import { LiveCodeEditor } from '@/components/live-code-editor'
 import { DataVisualization } from '@/components/data-visualization'
 import { FloatingParticles } from '@/components/enhanced-animations'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 60 },
   animate: { 
     opacity: 1, 
@@ -20,7 +20,7 @@ const fadeInUp = {
   }
 }
 
-const stagger = {
+const stagger: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.1
@@ -110,10 +110,10 @@ export default function ProjectsPage() {
             viewport={{ once: true }}
           >
             {/* Dublin Bus Pipeline Project */}
-            <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105">
+            <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs transition-all duration-500 hover:scale-105">
               <div className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
+                  <div className="w-16 h-16 bg-linear-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
                     🚌
                   </div>
                   <div>
@@ -148,10 +148,10 @@ export default function ProjectsPage() {
             </Card>
 
             {/* ML Delay Prediction Project */}
-            <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105">
+            <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs transition-all duration-500 hover:scale-105">
               <div className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
+                  <div className="w-16 h-16 bg-linear-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-2xl mr-4">
                     🧠
                   </div>
                   <div>
@@ -189,7 +189,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* Interactive Data Pipeline Demo */}
-      <Section className="relative bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20">
+      <Section className="relative bg-linear-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20">
         <InteractivePipeline />
       </Section>
 
@@ -199,7 +199,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* Data Visualization Showcase */}
-      <Section className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+      <Section className="relative bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
         <div className="container">
           <motion.div
             className="text-center mb-12"
@@ -218,7 +218,7 @@ export default function ProjectsPage() {
           </motion.div>
           
           <motion.div
-            className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8"
+            className="bg-linear-to-br from-slate-900 to-slate-800 rounded-3xl p-8"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -276,7 +276,7 @@ export default function ProjectsPage() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className={`bg-gradient-to-br ${skill.color} p-1 rounded-2xl`}>
+                <div className={`bg-linear-to-br ${skill.color} p-1 rounded-2xl`}>
                   <div className="bg-background p-4 rounded-xl text-center group-hover:bg-transparent transition-all duration-300">
                     <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
                       {skill.icon}
@@ -293,7 +293,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* Case Studies CTA */}
-      <Section className="py-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+      <Section className="py-16 bg-linear-to-r from-purple-500/10 to-pink-500/10">
         <div className="container text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -322,7 +322,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* Project Filter System */}
-      <Section className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+      <Section className="relative bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
         <ProjectFilter />
       </Section>
     </>

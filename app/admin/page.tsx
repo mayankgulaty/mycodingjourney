@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { Suspense, useState, useEffect, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import {
     Plus,
@@ -24,7 +24,16 @@ import {
 import type { Article } from '@/lib/types'
 import { useToast } from '@/components/toast'
 
-export default function AdminDashboard() {
+// Next 14.2+ requires useSearchParams() consumers to sit under a Suspense boundary
+export default function AdminDashboardPage() {
+    return (
+        <Suspense fallback={null}>
+            <AdminDashboard />
+        </Suspense>
+    )
+}
+
+function AdminDashboard() {
     const { success, error: showError } = useToast()
     const [articles, setArticles] = useState<Article[]>([])
     const [loading, setLoading] = useState(true)
@@ -244,7 +253,7 @@ export default function AdminDashboard() {
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             {/* Header */}
-            <header className="bg-white dark:bg-gray-800 shadow">
+            <header className="bg-white dark:bg-gray-800 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                         Article Manager
@@ -279,7 +288,7 @@ export default function AdminDashboard() {
             <main className="max-w-7xl mx-auto px-4 py-8">
                 {/* Stats Cards */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
                                 <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
@@ -290,7 +299,7 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
                                 <Eye className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -301,7 +310,7 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
                                 <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
@@ -312,7 +321,7 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                                 <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -326,7 +335,7 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Search and Filters */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 mb-6">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 mb-6">
                     <div className="flex flex-col md:flex-row gap-4">
                         {/* Search */}
                         <div className="flex-1 relative">
@@ -442,7 +451,7 @@ export default function AdminDashboard() {
                         <RefreshCw className="w-8 h-8 animate-spin text-purple-600" />
                     </div>
                 ) : articles.length === 0 ? (
-                    <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow">
+                    <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
                         <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             No articles yet. Create your first one!
@@ -456,7 +465,7 @@ export default function AdminDashboard() {
                         </button>
                     </div>
                 ) : filteredArticles.length === 0 ? (
-                    <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow">
+                    <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
                         <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                         <p className="text-gray-600 dark:text-gray-400 mb-2">
                             No articles found matching your criteria
@@ -473,7 +482,7 @@ export default function AdminDashboard() {
                         </button>
                     </div>
                 ) : (
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
                         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead className="bg-gray-50 dark:bg-gray-700">
                                 <tr>

@@ -200,12 +200,12 @@ export function InteractivePipeline() {
               >
                 <div className={`
                   w-full lg:w-32 h-32 rounded-2xl p-4 flex flex-col items-center justify-center text-center gap-2
-                  bg-gradient-to-br ${node.color} shadow-xl relative overflow-hidden transition-all duration-300
+                  bg-linear-to-br ${node.color} shadow-xl relative overflow-hidden transition-all duration-300
                   ${node.status === 'processing' ? 'ring-4 ring-white/20 ring-offset-2 ring-offset-slate-900' : ''}
                 `}>
 
                   {/* Inner shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   <div className="text-white drop-shadow-md relative z-10">
                     {node.icon}
@@ -235,7 +235,7 @@ export function InteractivePipeline() {
 
               {/* Connecting Line (Desktop) */}
               {index < nodes.length - 1 && (
-                <div className="hidden lg:flex flex-1 mx-4 items-center justify-center h-full min-w-[3rem] relative">
+                <div className="hidden lg:flex flex-1 mx-4 items-center justify-center h-full min-w-12 relative">
                   <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
                     <motion.div
                       className="h-full bg-cyan-400 box-shadow-[0_0_10px_rgba(34,211,238,0.5)]"

@@ -1,29 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAdminRequest } from '@/lib/admin-auth'
 import { getArticleById, updateArticle, deleteArticle } from '@/lib/articles'
 
-// Verify admin password
+// Verify admin password (constant-time, fails closed if unset)
 function isAuthorized(request: NextRequest): boolean {
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader) return false
-
-    const [type, token] = authHeader.split(' ')
-    if (type !== 'Bearer') return false
-
-    return token === process.env.ADMIN_PASSWORD
+    return isAdminRequest(request)
 }
 
 // GET /api/articles/[id] - Get single article by ID
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     // Verify admin auth (getting by ID is admin-only)
     if (!isAuthorized(request)) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
+
     try {
-        const article = await getArticleById(params.id)
+        const article = await getArticleById(id)
 
         if (!article) {
             return NextResponse.json({ error: 'Article not found' }, { status: 404 })
@@ -39,18 +36,20 @@ export async function GET(
 // PUT /api/articles/[id] - Update article
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     // Verify admin auth
     if (!isAuthorized(request)) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
+
     try {
         const body = await request.json()
 
         const article = await updateArticle({
-            id: params.id,
+            id,
             ...body,
         })
 
@@ -68,15 +67,17 @@ export async function PUT(
 // DELETE /api/articles/[id] - Delete article
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     // Verify admin auth
     if (!isAuthorized(request)) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
+
     try {
-        const success = await deleteArticle(params.id)
+        const success = await deleteArticle(id)
 
         if (!success) {
             return NextResponse.json({ error: 'Failed to delete article' }, { status: 500 })

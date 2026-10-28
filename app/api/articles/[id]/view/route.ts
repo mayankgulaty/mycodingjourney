@@ -4,11 +4,13 @@ import { incrementViewCount } from '@/lib/articles'
 // POST /api/articles/[id]/view - Increment view count
 export async function POST(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params
+
     try {
         // The id here is actually the slug
-        await incrementViewCount(params.id)
+        await incrementViewCount(id)
         return NextResponse.json({ success: true })
     } catch (error) {
         console.error('Error incrementing view count:', error)

@@ -64,7 +64,7 @@ export default async function BlogPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {articles.map((article) => (
                 <Link key={article.id} href={`/blog/${article.slug}`}>
-                  <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer">
+                  <Card className="h-full glass-morphism border-white/20 hover:border-white/40 dark:border-white/20 dark:hover:border-white/40 border-gray-200 hover:border-gray-300 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs transition-all duration-500 hover:scale-105 cursor-pointer">
                     {/* Cover Image */}
                     {article.cover_image && (
                       <div className="h-48 overflow-hidden rounded-t-xl">

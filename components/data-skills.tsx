@@ -52,7 +52,7 @@ export function DataSkills() {
   const categories: DataSkill['category'][] = ['Languages', 'Tools', 'Cloud', 'Databases']
 
   return (
-    <div className="w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6">
+    <div className="w-full bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6">
       <div className="mb-6">
         <h3 className="text-2xl font-bold text-white mb-4">Data Engineering Skills</h3>
         

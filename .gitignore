@@ -40,6 +40,23 @@ next-env.d.ts
 .idea/
 
 # OS
-Thumbs.dbtemp-repo/
-projects/dublin-bus-pipeline/.env
+Thumbs.db
+temp-repo/
+
+# secrets / environment files (never commit; use platform secrets)
+.env
+.env.*
+!.env.example
 **/.env
+**/.env.*
+.dev.vars
+*.key
+*.p12
+*.pfx
+*.pem
+*.crt
+service-account*.json
+
+# cloudflare / opennext build output
+.wrangler/
+.open-next/

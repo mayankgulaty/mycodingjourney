@@ -1,14 +1,10 @@
-'use server'
-
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase'
-
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'
+import { isAdminRequest } from '@/lib/admin-auth'
 
 export async function POST(request: NextRequest) {
     // Check authorization
-    const authHeader = request.headers.get('authorization')
-    if (!authHeader?.startsWith('Bearer ') || authHeader.slice(7) !== ADMIN_PASSWORD) {
+    if (!isAdminRequest(request)) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -33,7 +29,14 @@ export async function POST(request: NextRequest) {
         }
 
         // Generate unique filename
-        const ext = file.name.split('.').pop() || 'jpg'
+        // Derive the extension from the validated MIME type, never from the client-supplied filename
+        const extByType: Record<string, string> = {
+            'image/jpeg': 'jpg',
+            'image/png': 'png',
+            'image/gif': 'gif',
+            'image/webp': 'webp',
+        }
+        const ext = extByType[file.type]
         const timestamp = Date.now()
         const randomStr = Math.random().toString(36).substring(2, 8)
         const filename = `cover-${timestamp}-${randomStr}.${ext}`

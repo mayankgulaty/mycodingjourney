@@ -17,9 +17,9 @@ import { siteConfig } from '@/lib/site'
 const USE_SUPABASE = process.env.NEXT_PUBLIC_SUPABASE_URL ? true : false
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export const revalidate = 60 // Revalidate every 60 seconds
@@ -36,8 +36,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params
   if (USE_SUPABASE) {
-    const article = await getArticleBySlug(params.slug)
+    const article = await getArticleBySlug(slug)
 
     if (!article) {
       return { title: 'Post Not Found' }
@@ -72,7 +73,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   // Fallback to static posts
-  const post = getPostBySlug(params.slug)
+  const post = getPostBySlug(slug)
 
   if (!post) {
     return { title: 'Post Not Found' }
@@ -120,8 +121,9 @@ function generateArticleJsonLd(article: { title: string; excerpt?: string | null
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params
   if (USE_SUPABASE) {
-    const article = await getArticleBySlug(params.slug)
+    const article = await getArticleBySlug(slug)
 
     if (!article) {
       notFound()
@@ -144,7 +146,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
 
         {/* Track view */}
@@ -160,7 +162,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="w-full h-full object-cover"
               style={{ objectPosition: article.cover_image_position || '50% 50%' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
           </div>
         )}
 
@@ -214,9 +216,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Section>
 
         {/* Author Bio */}
-        <Section className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+        <Section className="bg-linear-to-r from-purple-500/10 to-pink-500/10">
           <div className="container max-w-4xl">
-            <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm">
+            <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs">
               <div className="p-8">
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-500/30">
@@ -313,7 +315,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Fallback: Use static posts (original implementation)
   const { parseMarkdown } = await import('@/lib/markdown')
-  const post = getPostBySlug(params.slug)
+  const post = getPostBySlug(slug)
 
   if (!post) {
     notFound()
@@ -374,9 +376,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </Section>
 
       {/* Author Bio */}
-      <Section className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+      <Section className="bg-linear-to-r from-purple-500/10 to-pink-500/10">
         <div className="container max-w-4xl">
-          <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-sm">
+          <Card className="glass-morphism border-white/20 dark:border-white/20 border-gray-200 dark:bg-white/5 bg-white/80 dark:backdrop-blur-md backdrop-blur-xs">
             <div className="p-8">
               <div className="flex items-start gap-6">
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-500/30">

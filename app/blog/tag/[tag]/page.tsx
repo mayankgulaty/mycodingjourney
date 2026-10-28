@@ -9,9 +9,9 @@ import { Section } from '@/components/section'
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react'
 
 interface TagPageProps {
-    params: {
+    params: Promise<{
         tag: string
-    }
+    }>
 }
 
 export const revalidate = 60
@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
-    const tag = decodeURIComponent(params.tag)
+    const { tag: rawTag } = await params
+    const tag = decodeURIComponent(rawTag)
     return {
         title: `Articles tagged "${tag}"`,
         description: `Browse all articles about ${tag} on My Coding Journey`,
@@ -30,7 +31,8 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-    const tag = decodeURIComponent(params.tag)
+    const { tag: rawTag } = await params
+    const tag = decodeURIComponent(rawTag)
 
     const { data: articles, total } = await getPublishedArticles({
         tag,
@@ -44,7 +46,7 @@ export default async function TagPage({ params }: TagPageProps) {
     return (
         <>
             {/* Hero Section */}
-            <Section className="py-12 md:py-16 bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800">
+            <Section className="py-12 md:py-16 bg-linear-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-800">
                 <div className="container max-w-4xl">
                     <Link
                         href="/blog"
@@ -83,7 +85,7 @@ export default async function TagPage({ params }: TagPageProps) {
                                     <div className="flex gap-6">
                                         {/* Thumbnail */}
                                         {article.cover_image && (
-                                            <div className="hidden sm:block w-32 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
+                                            <div className="hidden sm:block w-32 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img
                                                     src={article.cover_image}
