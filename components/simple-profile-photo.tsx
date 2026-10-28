@@ -31,7 +31,7 @@ export function SimpleProfilePhoto({
       transition={{ duration: 0.8, ease: "easeOut" }}
       whileHover={animated ? { scale: 1.05, rotate: 5 } : {}}
     >
-      <div className={`relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 dark:from-gray-700 dark:to-gray-800 ${
+      <div className={`relative w-full h-full rounded-full overflow-hidden bg-linear-to-br from-blue-100 to-purple-100 dark:from-gray-700 dark:to-gray-800 ${
         showBorder ? 'ring-4 ring-white/20 ring-offset-4 ring-offset-transparent' : ''
       }`}>
         {/* Fallback content */}
@@ -42,12 +42,12 @@ export function SimpleProfilePhoto({
         </div>
         
         {/* Gradient overlay for professional look */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
         
         {/* Animated border glow */}
         {animated && (
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+            className="absolute inset-0 rounded-full border-2 border-transparent bg-linear-to-r from-blue-500 via-purple-500 to-pink-500"
             animate={{
               rotate: [0, 360],
             }}

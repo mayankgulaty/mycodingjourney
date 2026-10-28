@@ -37,7 +37,7 @@ export function LoadingScreen() {
               animate={{ rotate: 360 }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center relative overflow-hidden p-1">
+              <div className="w-full h-full bg-linear-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center relative overflow-hidden p-1">
                 {/* Profile Photo */}
                 <div className="w-full h-full rounded-full overflow-hidden relative">
                   <Image
@@ -47,7 +47,7 @@ export function LoadingScreen() {
                     className="object-cover"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
                 </div>
                 
                 {/* Database icon overlay */}
@@ -151,7 +151,7 @@ export function LoadingScreen() {
               transition={{ delay: 1.8 }}
             >
               <motion.div
-                className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
+                className="h-full bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 3, ease: "easeOut" }}

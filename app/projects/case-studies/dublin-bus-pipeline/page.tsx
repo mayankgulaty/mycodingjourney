@@ -1,14 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowLeft, Database, MapPin, Clock, TrendingUp, Bus, Wifi, BarChart3, Github, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Database, MapPin, Clock, TrendingUp, Bus, Wifi, BarChart3, ExternalLink } from 'lucide-react'
+import { Github } from '@/components/brand-icons'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
 import { DublinBusDashboard } from '@/components/dublin-bus-dashboard'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 40 },
   animate: { 
     opacity: 1, 
@@ -37,7 +38,7 @@ export default function DublinBusPipelineCaseStudy() {
             </Link>
 
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white">
+              <div className="w-16 h-16 bg-linear-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white">
                 <Bus className="w-8 h-8" />
               </div>
               <div>
@@ -187,7 +188,7 @@ export default function DublinBusPipelineCaseStudy() {
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
+                <div className="p-6 bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
                   <div className="text-3xl mb-3">🗺️</div>
                   <h3 className="font-semibold text-foreground mb-2">Live Bus Map</h3>
                   <p className="text-foreground/70 text-sm">
@@ -196,7 +197,7 @@ export default function DublinBusPipelineCaseStudy() {
                   </p>
                 </div>
 
-                <div className="p-6 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-xl border border-red-500/20">
+                <div className="p-6 bg-linear-to-br from-red-500/10 to-orange-500/10 rounded-xl border border-red-500/20">
                   <div className="text-3xl mb-3">🔥</div>
                   <h3 className="font-semibold text-foreground mb-2">Density Heatmap</h3>
                   <p className="text-foreground/70 text-sm">
@@ -205,7 +206,7 @@ export default function DublinBusPipelineCaseStudy() {
                   </p>
                 </div>
 
-                <div className="p-6 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20">
+                <div className="p-6 bg-linear-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/20">
                   <div className="text-3xl mb-3">📊</div>
                   <h3 className="font-semibold text-foreground mb-2">Delay Distribution</h3>
                   <p className="text-foreground/70 text-sm">
@@ -214,7 +215,7 @@ export default function DublinBusPipelineCaseStudy() {
                   </p>
                 </div>
 
-                <div className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20">
+                <div className="p-6 bg-linear-to-br from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20">
                   <div className="text-3xl mb-3">🎯</div>
                   <h3 className="font-semibold text-foreground mb-2">Performance Gauge</h3>
                   <p className="text-foreground/70 text-sm">
@@ -273,7 +274,7 @@ export default function DublinBusPipelineCaseStudy() {
 
           {/* Links */}
           <motion.div {...fadeInUp}>
-            <Card className="p-8 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20">
+            <Card className="p-8 bg-linear-to-r from-green-500/10 to-emerald-500/10 border-green-500/20">
               <h2 className="text-2xl font-bold mb-4 text-foreground">View the Code</h2>
               <p className="text-foreground/70 mb-6">
                 The full source code, including data collector, analysis notebooks, and 
@@ -294,7 +295,7 @@ export default function DublinBusPipelineCaseStudy() {
       </Section>
 
       {/* CTA */}
-      <Section className="py-16 bg-gradient-to-r from-green-500/10 to-emerald-500/10">
+      <Section className="py-16 bg-linear-to-r from-green-500/10 to-emerald-500/10">
         <div className="container text-center">
           <h2 className="text-3xl font-bold mb-4 text-foreground">
             Want to see more data projects?

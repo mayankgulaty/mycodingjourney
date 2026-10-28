@@ -42,7 +42,7 @@ export function DataVisualization() {
   const maxValue = data.length > 0 ? Math.max(...data.map(d => d.value)) : 100
 
   return (
-    <div className="w-full h-64 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 relative overflow-hidden">
+    <div className="w-full h-64 bg-linear-to-br from-slate-900 to-slate-800 rounded-2xl p-6 relative overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 opacity-10">
         <svg width="100%" height="100%" className="w-full h-full">
@@ -86,7 +86,7 @@ export function DataVisualization() {
             >
               {/* Animated shimmer effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
+                className="absolute inset-0 bg-linear-to-r from-transparent via-white to-transparent opacity-30"
                 animate={{
                   x: ['-100%', '100%']
                 }}

@@ -42,7 +42,7 @@ export function GradientText({
 
   const textElement = (
     <span
-      className={`bg-gradient-to-r ${gradientClass} bg-clip-text text-transparent ${sizeClass} ${className}`}
+      className={`bg-linear-to-r ${gradientClass} bg-clip-text text-transparent ${sizeClass} ${className}`}
       style={animated ? {
         backgroundSize: '200% 200%',
         animation: 'gradient-shift 3s ease infinite'

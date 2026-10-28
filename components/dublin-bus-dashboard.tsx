@@ -61,7 +61,7 @@ function MetricCard({ icon, value, label, trend }: {
 }) {
   return (
     <motion.div 
-      className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700/50"
+      className="bg-linear-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700/50"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
@@ -236,11 +236,11 @@ export function DublinBusDashboard() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg p-4 border border-blue-500/20">
+            <div className="bg-linear-to-br from-blue-500/10 to-purple-500/10 rounded-lg p-4 border border-blue-500/20">
               <div className="text-2xl font-bold text-white mb-1">{data.fleet_summary.unique_routes}</div>
               <div className="text-sm text-gray-400">Total Routes</div>
             </div>
-            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-lg p-4 border border-green-500/20">
+            <div className="bg-linear-to-br from-green-500/10 to-emerald-500/10 rounded-lg p-4 border border-green-500/20">
               <div className="text-2xl font-bold text-white mb-1">{data.fleet_summary.snapshots}</div>
               <div className="text-sm text-gray-400">Data Snapshots</div>
             </div>

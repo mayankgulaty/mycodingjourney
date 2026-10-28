@@ -12,7 +12,7 @@ interface CursorTrail {
 
 export function CursorTrail() {
   const trailRef = useRef<CursorTrail[]>([])
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {

@@ -78,7 +78,7 @@ function ToastContainer({ toasts, removeToast }: { toasts: Toast[], removeToast:
     if (toasts.length === 0) return null
 
     return (
-        <div className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm">
+        <div className="fixed bottom-4 right-4 z-100 flex flex-col gap-2 max-w-sm">
             {toasts.map(toast => (
                 <ToastItem key={toast.id} toast={toast} onClose={() => removeToast(toast.id)} />
             ))}
@@ -115,11 +115,11 @@ function ToastItem({ toast, onClose }: { toast: Toast, onClose: () => void }) {
             className={`flex items-start gap-3 p-4 rounded-lg border shadow-lg animate-slide-up ${colors[toast.type]}`}
             role="alert"
         >
-            <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${iconColors[toast.type]}`} />
+            <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColors[toast.type]}`} />
             <p className="flex-1 text-sm font-medium">{toast.message}</p>
             <button
                 onClick={onClose}
-                className="flex-shrink-0 p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                className="shrink-0 p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 aria-label="Close notification"
             >
                 <X className="w-4 h-4" />

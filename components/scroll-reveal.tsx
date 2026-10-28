@@ -1,6 +1,6 @@
 'use client'
 
-import { useInView } from 'framer-motion'
+import { useInView, Variants } from 'framer-motion'
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 
@@ -14,7 +14,7 @@ interface ScrollRevealProps {
   once?: boolean
 }
 
-const directionVariants = {
+const directionVariants: Variants = {
   up: { y: 100, opacity: 0 },
   down: { y: -100, opacity: 0 },
   left: { x: 100, opacity: 0 },

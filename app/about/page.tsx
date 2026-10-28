@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Image from 'next/image'
 import { Download, MapPin, Briefcase } from 'lucide-react'
 import { Section } from '@/components/section'
@@ -8,7 +8,7 @@ import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
 import { siteConfig } from '@/lib/site'
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   initial: { opacity: 0, y: 60 },
   animate: {
     opacity: 1,
@@ -17,7 +17,7 @@ const fadeInUp = {
   }
 }
 
-const stagger = {
+const stagger: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.1

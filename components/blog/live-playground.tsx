@@ -14,7 +14,7 @@ import { Play, RotateCcw, Maximize2, Minimize2 } from 'lucide-react'
 
 interface LivePlaygroundProps {
     code: string
-    language?: 'javascript' | 'typescript' | 'react' | 'react-ts'
+    language?: string
     title?: string
     showConsole?: boolean
     dependencies?: Record<string, string>
@@ -70,9 +70,27 @@ root.render(<App />);`,
     },
 }
 
+// The MDX preprocessor passes the raw fence language (jsx, tsx, js, ts, ...),
+// so normalise it to one of the template keys instead of crashing on unknown values.
+function normalizeLanguage(language: string): keyof typeof templates {
+    switch (language) {
+        case 'react':
+        case 'jsx':
+            return 'react'
+        case 'react-ts':
+        case 'tsx':
+            return 'react-ts'
+        case 'typescript':
+        case 'ts':
+            return 'typescript'
+        default:
+            return 'javascript'
+    }
+}
+
 export function LivePlayground({
     code,
-    language = 'react',
+    language: languageProp = 'react',
     title,
     showConsole = false,
     dependencies = {},
@@ -80,6 +98,7 @@ export function LivePlayground({
     const [isExpanded, setIsExpanded] = useState(false)
     const [showConsolePanel, setShowConsolePanel] = useState(showConsole)
 
+    const language = normalizeLanguage(languageProp)
     const template = templates[language]
 
     // Build files object with the user's code

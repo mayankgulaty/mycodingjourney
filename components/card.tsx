@@ -13,7 +13,7 @@ export function Card({ children, className, hover = true }: CardProps) {
   return (
     <motion.div
       className={cn(
-        'rounded-lg border border-border bg-card p-6 shadow-sm transition-all duration-300',
+        'rounded-lg border border-border bg-card p-6 shadow-xs transition-all duration-300',
         hover && 'card-hover',
         className
       )}
