@@ -56,10 +56,10 @@ export default function DelayPredictionCaseStudy() {
             {/* Key Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { value: '87%', label: 'Prediction Accuracy', icon: <Target className="w-5 h-5" /> },
                 { value: '15min', label: 'Advance Warning', icon: <Clock className="w-5 h-5" /> },
-                { value: '100K+', label: 'Training Samples', icon: <BarChart3 className="w-5 h-5" /> },
-                { value: '< 50ms', label: 'Inference Time', icon: <Zap className="w-5 h-5" /> }
+                { value: 'XGBoost', label: 'Model', icon: <Target className="w-5 h-5" /> },
+                { value: 'GTFS-RT', label: 'Data Source', icon: <BarChart3 className="w-5 h-5" /> },
+                { value: 'Python', label: 'Stack', icon: <Zap className="w-5 h-5" /> }
               ].map((metric, idx) => (
                 <div 
                   key={idx}
@@ -203,28 +203,6 @@ export default function DelayPredictionCaseStudy() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-4">
-                  <h4 className="font-semibold text-foreground mb-3">Model Performance</h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-foreground/70">MAE (Mean Absolute Error)</span>
-                      <span className="font-mono text-foreground">1.8 min</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-foreground/70">RMSE</span>
-                      <span className="font-mono text-foreground">2.4 min</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-foreground/70">R² Score</span>
-                      <span className="font-mono text-foreground">0.74</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-foreground/70">Within ±3 min accuracy</span>
-                      <span className="font-mono text-green-500">87%</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-4">
                   <h4 className="font-semibold text-foreground mb-3">Feature Importance</h4>
                   <div className="space-y-2">
                     {[
@@ -253,8 +231,7 @@ export default function DelayPredictionCaseStudy() {
               </div>
 
               <p className="text-foreground/70 text-sm">
-                The model achieves 87% accuracy within ±3 minutes, making it reliable enough 
-                for passenger notifications while leaving room for improvement with more data.
+                This is an exploratory model: with more data it can be validated properly and improved.
               </p>
             </Card>
           </motion.div>

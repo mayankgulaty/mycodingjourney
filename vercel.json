@@ -4,13 +4,26 @@
   "framework": "nextjs",
   "installCommand": "npm install",
   "devCommand": "npm run dev",
-  "regions": ["iad1"],
+  "regions": [
+    "iad1"
+  ],
   "functions": {
     "app/api/contact/route.ts": {
       "maxDuration": 10
     }
   },
   "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mycodingjourney.com"
+        }
+      ],
+      "destination": "https://www.mycodingjourney.com/:path",
+      "permanent": true
+    },
     {
       "source": "/home",
       "destination": "/",

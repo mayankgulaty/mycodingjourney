@@ -1,5 +1,6 @@
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import remarkGfm from 'remark-gfm'
 
 // Serialize markdown content to MDX for rendering
 export async function serializeMDX(content: string): Promise<MDXRemoteSerializeResult> {
@@ -8,7 +9,7 @@ export async function serializeMDX(content: string): Promise<MDXRemoteSerializeR
 
     const mdxSource = await serialize(processedContent, {
         mdxOptions: {
-            remarkPlugins: [],
+            remarkPlugins: [remarkGfm],
             rehypePlugins: [],
             format: 'mdx',
         },

@@ -47,13 +47,13 @@ export default function CaseStudiesPage() {
       id: 'transit-delay-prediction',
       title: 'Transit Delay Prediction',
       subtitle: 'ML-Powered Delay Forecasting',
-      description: 'Machine learning model that predicts bus delays 15 minutes in advance with 87% accuracy, enabling proactive passenger notifications.',
+      description: 'Machine learning model that predicts bus delays 15 minutes in advance, enabling proactive passenger notifications.',
       icon: <Brain className="w-8 h-8" />,
       metrics: [
-        { value: '87%', label: 'Accuracy' },
         { value: '15min', label: 'Advance Warning' },
-        { value: '100K+', label: 'Training Samples' },
-        { value: '<50ms', label: 'Inference' }
+        { value: 'XGBoost', label: 'Model' },
+        { value: 'GTFS-RT', label: 'Data Source' },
+        { value: 'Python', label: 'Stack' }
       ],
       tags: ['Python', 'XGBoost', 'Scikit-learn', 'Pandas', 'GTFS-RT'],
       status: 'Prototype',
@@ -101,10 +101,10 @@ export default function CaseStudiesPage() {
       description: 'Built a high-performance portfolio website with custom CMS, demonstrating full-stack capabilities alongside data engineering expertise.',
       icon: <Code className="w-8 h-8" />,
       metrics: [
-        { value: '100', label: 'Lighthouse Score' },
-        { value: '<1s', label: 'Load Time' },
+        { value: 'Next 16', label: 'Framework' },
         { value: 'SSR', label: 'Server Rendering' },
-        { value: 'A+', label: 'SEO Grade' }
+        { value: 'MDX', label: 'Blog Engine' },
+        { value: 'Supabase', label: 'Content Store' }
       ],
       tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Vercel'],
       status: 'Live',

@@ -5,11 +5,13 @@ import { Card } from '@/components/card'
 import { Badge } from '@/components/badge'
 import { getPublishedArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Blog | My Coding Journey',
-  description: 'Thoughts, tutorials, and insights from my coding journey',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Blog',
+  description: 'Data engineering, system design and full-stack notes: pipelines, analytics and lessons learned.',
+  path: '/blog',
+})
 
 export const revalidate = 60 // Revalidate every 60 seconds
 

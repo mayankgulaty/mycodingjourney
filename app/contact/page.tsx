@@ -28,10 +28,12 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    website: '' // honeypot: hidden from humans, bots fill it
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'unavailable'>('idle')
+  const [errorText, setErrorText] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,10 +48,15 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       })
       
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}))
+
+      if (response.ok && data.delivered) {
         setSubmitStatus('success')
-        setFormData({ name: '', email: '', message: '' })
+        setFormData({ name: '', email: '', message: '', website: '' })
+      } else if (response.status === 503) {
+        setSubmitStatus('unavailable')
       } else {
+        setErrorText(typeof data.error === 'string' ? data.error : '')
         setSubmitStatus('error')
       }
     } catch (error) {
@@ -110,7 +117,7 @@ export default function ContactPage() {
               <Card>
                 <h2 className="text-2xl font-bold mb-6">Send me a message</h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="relative space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
                       Name
@@ -159,6 +166,19 @@ export default function ContactPage() {
                     />
                   </div>
                   
+                  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                    <label htmlFor="website">Leave this field empty</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -175,7 +195,17 @@ export default function ContactPage() {
                   
                   {submitStatus === 'error' && (
                     <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200">
-                      Something went wrong. Please try again or contact me directly.
+                      {errorText || 'Something went wrong. Please try again or contact me directly.'}
+                    </div>
+                  )}
+
+                  {submitStatus === 'unavailable' && (
+                    <div role="alert" className="p-4 bg-yellow-100 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg text-yellow-900 dark:text-yellow-200">
+                      The contact form isn&apos;t connected yet, so your message was <strong>not</strong> sent.
+                      Please email me directly at{' '}
+                      <a className="underline font-medium" href={`mailto:${siteConfig.author.email}?subject=Hello%20from%20mycodingjourney.com&body=${encodeURIComponent(formData.message)}`}>
+                        {siteConfig.author.email}
+                      </a>.
                     </div>
                   )}
                 </form>

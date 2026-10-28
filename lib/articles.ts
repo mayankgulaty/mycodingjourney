@@ -271,12 +271,20 @@ export async function deleteArticle(id: string): Promise<boolean> {
     return true
 }
 
-// Increment view count
-export async function incrementViewCount(slug: string): Promise<void> {
-    const { error } = await supabase.rpc('increment_view_count', { article_slug: slug })
-
-    if (error) {
+// Increment view count.
+// Uses the server-side admin client so the RPC can be revoked from the public `anon`
+// role in Supabase (see supabase-hardening.sql) without breaking view counting.
+export async function incrementViewCount(slug: string): Promise<boolean> {
+    try {
+        const { error } = await createAdminClient().rpc('increment_view_count', { article_slug: slug })
+        if (error) {
+            console.error('Error incrementing view count:', error.message)
+            return false
+        }
+        return true
+    } catch (error) {
         console.error('Error incrementing view count:', error)
+        return false
     }
 }
 
