@@ -8,7 +8,8 @@ import { siteConfig } from './site'
 export function pageMetadata(opts: { title: string; description: string; path: string }): Metadata {
   const fullTitle = `${opts.title} | ${siteConfig.author.name}`
   return {
-    title: opts.title,
+    // absolute: nested layouts reset the root template, so build the full title here
+    title: { absolute: fullTitle },
     description: opts.description,
     alternates: { canonical: opts.path },
     openGraph: {
