@@ -2,6 +2,15 @@
 
 import { useState } from 'react'
 import { Check, Copy, Terminal } from 'lucide-react'
+import { highlightLine, type TokenKind } from '@/lib/highlight'
+
+const tokenClass: Record<TokenKind, string> = {
+  plain: 'text-gray-100',
+  comment: 'text-gray-500',
+  string: 'text-emerald-300',
+  keyword: 'text-purple-300',
+  number: 'text-amber-300',
+}
 
 interface CodeBlockProps {
     code: string
@@ -110,7 +119,15 @@ export function CodeBlock({
                                             {lineNumber}
                                         </span>
                                     )}
-                                    <span className="text-gray-100 flex-1">{line || ' '}</span>
+                                    <span className="flex-1">
+                                      {line
+                                        ? highlightLine(line, language).map((token, tokenIndex) => (
+                                            <span key={tokenIndex} className={tokenClass[token.kind]}>
+                                              {token.text}
+                                            </span>
+                                          ))
+                                        : ' '}
+                                    </span>
                                 </div>
                             )
                         })}

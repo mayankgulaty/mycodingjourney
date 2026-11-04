@@ -1,62 +1,82 @@
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import type { PluggableList } from 'unified'
 import remarkGfm from 'remark-gfm'
 
-// Serialize markdown content to MDX for rendering
-export async function serializeMDX(content: string): Promise<MDXRemoteSerializeResult> {
-    // Process custom syntax before serialization
-    const processedContent = preprocessContent(content)
+/**
+ * Article bodies are markdown, not MDX.
+ *
+ * next-mdx-remote compiles each post with `new Function`. Workers reject that,
+ * and one article render spent hundreds of milliseconds of CPU doing it.
+ * Callers render the string with react-markdown instead. This module only
+ * rewrites the two custom syntaxes the editor emits (`:::callout` and
+ * ```lang live) and never compiles or evaluates the source.
+ */
 
-    const mdxSource = await serialize(processedContent, {
-        mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [],
-            format: 'mdx',
-        },
-        parseFrontmatter: false,
-    })
+export const articleRemarkPlugins: PluggableList = [remarkGfm]
 
-    return mdxSource
+export type CalloutKind = 'info' | 'tip' | 'warning' | 'danger' | 'note'
+
+export type ArticleSegment =
+  | { type: 'markdown'; markdown: string }
+  | { type: 'callout'; kind: CalloutKind; title?: string; markdown: string }
+
+const CALLOUT_KINDS = new Set<CalloutKind>(['info', 'tip', 'warning', 'danger', 'note'])
+
+/** `:::error` is what the editor toolbar inserts. Render it as a danger callout. */
+function calloutKind(raw: string): CalloutKind {
+  if (raw === 'error') return 'danger'
+  return CALLOUT_KINDS.has(raw as CalloutKind) ? (raw as CalloutKind) : 'note'
 }
 
-// Preprocess content to handle custom syntax
-function preprocessContent(content: string): string {
-    let processed = content
-
-    // Convert ```language live blocks to custom component syntax
-    processed = processed.replace(
-        /```(\w+)\s+live\n([\s\S]*?)```/g,
-        (_, language, code) => {
-            const escapedCode = code.trim().replace(/`/g, '\\`').replace(/\$/g, '\\$')
-            return `<LivePlayground code={\`${escapedCode}\`} language="${language}" />`
-        }
-    )
-
-    // Convert :::type callouts to Callout components
-    processed = processed.replace(
-        /:::(info|tip|warning|danger|note)(?:\s+(.+))?\n([\s\S]*?):::/g,
-        (_, type, title, content) => {
-            const titleProp = title ? ` title="${title.trim()}"` : ''
-            return `<Callout type="${type}"${titleProp}>\n${content.trim()}\n</Callout>`
-        }
-    )
-
-    return processed
+/**
+ * Turn ```lang live fences into ```lang-live so the renderer can see the flag
+ * without an MDX prop. Fences are rewritten before callouts are split, and
+ * callouts are only recognized outside fences.
+ */
+function rewriteLiveFences(source: string): string {
+  return source.replace(/```([A-Za-z0-9_+-]+)[ \t]+live[ \t]*\n/g, '```$1-live\n')
 }
 
-// Extract table of contents from content
-export function extractTOC(content: string): Array<{ id: string; title: string; level: number }> {
-    const headings: Array<{ id: string; title: string; level: number }> = []
-    const headingRegex = /^(#{2,4})\s+(.+)$/gm
+export function segmentArticle(source: string): ArticleSegment[] {
+  const text = rewriteLiveFences(source)
+  const segments: ArticleSegment[] = []
+  const re = /```[\s\S]*?```|:::(info|tip|warning|danger|note|error)(?:[ \t]+([^\n]+))?\n([\s\S]*?):::/g
+  let markdown = ''
+  let last = 0
 
-    let match
-    while ((match = headingRegex.exec(content)) !== null) {
-        const level = match[1].length
-        const title = match[2].trim()
-        const id = title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
-
-        headings.push({ id, title, level })
+  for (let match = re.exec(text); match; match = re.exec(text)) {
+    markdown += text.slice(last, match.index)
+    if (match[0].startsWith('```')) {
+      markdown += match[0]
+    } else {
+      if (markdown.trim()) segments.push({ type: 'markdown', markdown })
+      markdown = ''
+      const title = match[2]?.trim()
+      segments.push({
+        type: 'callout',
+        kind: calloutKind(match[1]),
+        title: title || undefined,
+        markdown: match[3].trim(),
+      })
     }
+    last = match.index + match[0].length
+  }
 
-    return headings
+  markdown += text.slice(last)
+  if (markdown.trim() || segments.length === 0) segments.push({ type: 'markdown', markdown })
+  return segments
+}
+
+export function extractTOC(content: string): Array<{ id: string; title: string; level: number }> {
+  const headings: Array<{ id: string; title: string; level: number }> = []
+  const headingRegex = /^(#{2,4})\s+(.+)$/gm
+
+  let match
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length
+    const title = match[2].trim()
+    const id = title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
+    headings.push({ id, title, level })
+  }
+
+  return headings
 }
