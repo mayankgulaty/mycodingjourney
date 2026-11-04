@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase'
+import { readEnv } from '@/lib/env'
 import { clientIp, rateLimit } from '@/lib/rate-limit'
 import { siteConfig } from '@/lib/site'
 
 export const runtime = 'nodejs'
+
+// Replaces vercel.json `functions["app/api/contact/route.ts"].maxDuration` (10s).
+// Workers do not read maxDuration; CONTACT_TIMEOUT_MS enforces the same budget.
+export const maxDuration = 10
+const CONTACT_TIMEOUT_MS = 10_000
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAILTO = `mailto:${siteConfig.author.email}`
@@ -11,15 +17,15 @@ const MAILTO = `mailto:${siteConfig.author.email}`
 type Msg = { name: string; email: string; message: string; ip: string; userAgent: string }
 
 async function sendWithResend(m: Msg): Promise<boolean> {
-  const key = process.env.RESEND_API_KEY
+  const key = readEnv('RESEND_API_KEY')
   if (!key) return false
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: process.env.CONTACT_FROM_EMAIL || 'mycodingjourney contact <onboarding@resend.dev>',
-        to: [process.env.CONTACT_TO_EMAIL || siteConfig.author.email],
+        from: readEnv('CONTACT_FROM_EMAIL') || 'mycodingjourney contact <onboarding@resend.dev>',
+        to: [readEnv('CONTACT_TO_EMAIL') || siteConfig.author.email],
         reply_to: m.email,
         subject: `[mycodingjourney] Message from ${m.name}`,
         text: `From: ${m.name} <${m.email}>\n\n${m.message}`,
@@ -36,7 +42,9 @@ async function sendWithResend(m: Msg): Promise<boolean> {
 
 async function storeInSupabase(m: Msg): Promise<boolean> {
   try {
-    const { error } = await createAdminClient()
+    const admin = createAdminClient()
+    if (!admin) return false
+    const { error } = await admin
       .from('contact_messages')
       .insert({ name: m.name, email: m.email, message: m.message, ip: m.ip, user_agent: m.userAgent })
     if (error) {
@@ -51,6 +59,30 @@ async function storeInSupabase(m: Msg): Promise<boolean> {
 }
 
 export async function POST(request: NextRequest) {
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const timeout = new Promise<NextResponse>((resolve) => {
+    timer = setTimeout(() => {
+      resolve(
+        NextResponse.json(
+          {
+            ok: false,
+            error: 'The contact form timed out. Please email me directly instead.',
+            fallback: MAILTO,
+          },
+          { status: 504 }
+        )
+      )
+    }, CONTACT_TIMEOUT_MS)
+  })
+
+  try {
+    return await Promise.race([handleContact(request), timeout])
+  } finally {
+    if (timer) clearTimeout(timer)
+  }
+}
+
+async function handleContact(request: NextRequest) {
   const ip = clientIp(request.headers)
 
   const limited = rateLimit(`contact:${ip}`, 3, 10 * 60_000)

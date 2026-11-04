@@ -40,10 +40,30 @@ const securityHeaders = [
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   poweredByHeader: false,
-  // next-mdx-remote must be bundled (not externalised) so it shares Next's React copy in the App Router.
-  transpilePackages: ['next-mdx-remote'],
+  // The Next image optimizer uses sharp, which does not run on Workers.
+  // `unoptimized` serves the original file from static assets.
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     mdxRs: true,
+  },
+  async redirects() {
+    // Moved from vercel.json. Middleware repeats these so they run on the Worker
+    // even if a host condition is dropped from the routing manifest.
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'mycodingjourney.com' }],
+        destination: 'https://www.mycodingjourney.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+    ]
   },
   async headers() {
     return [
@@ -56,3 +76,6 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+// Local `next dev` only. No-ops unless the dev server has initialized AsyncLocalStorage.
+import('@opennextjs/cloudflare').then((m) => m.initOpenNextCloudflareForDev())

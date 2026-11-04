@@ -1,0 +1,10 @@
+# Copy to .dev.vars for `wrangler dev` and `npm run preview`. Never commit real values.
+NEXTJS_ENV=development
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+ADMIN_PASSWORD=
+RESEND_API_KEY=
+CONTACT_FROM_EMAIL=
+CONTACT_TO_EMAIL=

@@ -46,10 +46,11 @@ temp-repo/
 # secrets / environment files (never commit; use platform secrets)
 .env
 .env.*
-!.env.example
 **/.env
 **/.env.*
+!.env.example
 .dev.vars
+!.dev.vars.example
 *.key
 *.p12
 *.pfx
@@ -60,3 +61,7 @@ service-account*.json
 # cloudflare / opennext build output
 .wrangler/
 .open-next/
+dist-worker/
+# Generated from wrangler.jsonc. References .open-next/worker, so regenerate after a build.
+cloudflare-env.d.ts
+worker-configuration.d.ts

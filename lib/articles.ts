@@ -1,4 +1,4 @@
-import { supabase, createAdminClient } from './supabase'
+import { getSupabase, createAdminClient } from './supabase'
 import type { Article, ArticleInput, ArticleUpdate, PaginatedResponse } from './types'
 import slugify from 'slugify'
 import readingTime from 'reading-time'
@@ -61,6 +61,12 @@ export async function getPublishedArticles(options?: {
     const pageSize = options?.pageSize || 10
     const offset = (page - 1) * pageSize
 
+    const supabase = getSupabase()
+    if (!supabase) {
+        console.error('Supabase is not configured')
+        return { data: [], total: 0, page, pageSize, totalPages: 0 }
+    }
+
     let query = supabase
         .from('articles')
         .select('*', { count: 'exact' })
@@ -96,6 +102,12 @@ export async function getPublishedArticles(options?: {
 
 // Get a single article by slug (public)
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
+    const supabase = getSupabase()
+    if (!supabase) {
+        console.error('Supabase is not configured')
+        return null
+    }
+
     const { data, error } = await supabase
         .from('articles')
         .select('*')
@@ -114,6 +126,10 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 // Get all articles (admin - includes drafts)
 export async function getAllArticles(): Promise<Article[]> {
     const adminClient = createAdminClient()
+    if (!adminClient) {
+        console.error('Supabase service role is not configured')
+        return []
+    }
 
     const { data, error } = await adminClient
         .from('articles')
@@ -131,6 +147,10 @@ export async function getAllArticles(): Promise<Article[]> {
 // Get article by ID (admin)
 export async function getArticleById(id: string): Promise<Article | null> {
     const adminClient = createAdminClient()
+    if (!adminClient) {
+        console.error('Supabase service role is not configured')
+        return null
+    }
 
     const { data, error } = await adminClient
         .from('articles')
@@ -149,6 +169,10 @@ export async function getArticleById(id: string): Promise<Article | null> {
 // Create a new article
 export async function createArticle(input: ArticleInput): Promise<Article | null> {
     const adminClient = createAdminClient()
+    if (!adminClient) {
+        console.error('Supabase service role is not configured')
+        return null
+    }
 
     const slug = input.slug || generateSlug(input.title)
     const readingTimeMinutes = calculateReadingTime(input.content)
@@ -186,6 +210,10 @@ export async function createArticle(input: ArticleInput): Promise<Article | null
 // Update an article
 export async function updateArticle(update: ArticleUpdate): Promise<Article | null> {
     const adminClient = createAdminClient()
+    if (!adminClient) {
+        console.error('Supabase service role is not configured')
+        return null
+    }
 
     const updateData: Record<string, unknown> = {}
 
@@ -257,6 +285,10 @@ export async function updateArticle(update: ArticleUpdate): Promise<Article | nu
 // Delete an article
 export async function deleteArticle(id: string): Promise<boolean> {
     const adminClient = createAdminClient()
+    if (!adminClient) {
+        console.error('Supabase service role is not configured')
+        return false
+    }
 
     const { error } = await adminClient
         .from('articles')
@@ -276,7 +308,12 @@ export async function deleteArticle(id: string): Promise<boolean> {
 // role in Supabase (see supabase-hardening.sql) without breaking view counting.
 export async function incrementViewCount(slug: string): Promise<boolean> {
     try {
-        const { error } = await createAdminClient().rpc('increment_view_count', { article_slug: slug })
+        const adminClient = createAdminClient()
+        if (!adminClient) {
+            console.error('Supabase service role is not configured')
+            return false
+        }
+        const { error } = await adminClient.rpc('increment_view_count', { article_slug: slug })
         if (error) {
             console.error('Error incrementing view count:', error.message)
             return false
@@ -290,6 +327,12 @@ export async function incrementViewCount(slug: string): Promise<boolean> {
 
 // Get all unique tags from published articles
 export async function getAllTags(): Promise<string[]> {
+    const supabase = getSupabase()
+    if (!supabase) {
+        console.error('Supabase is not configured')
+        return []
+    }
+
     const { data, error } = await supabase
         .from('articles')
         .select('tags')
@@ -306,6 +349,12 @@ export async function getAllTags(): Promise<string[]> {
 
 // Get article slugs for static generation
 export async function getArticleSlugs(): Promise<string[]> {
+    const supabase = getSupabase()
+    if (!supabase) {
+        console.error('Supabase is not configured')
+        return []
+    }
+
     const { data, error } = await supabase
         .from('articles')
         .select('slug')

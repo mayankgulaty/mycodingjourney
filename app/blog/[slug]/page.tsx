@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { getArticleBySlug, getArticleSlugs, getPublishedArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/utils'
-import { serializeMDX } from '@/lib/mdx'
 import { Badge } from '@/components/badge'
 import { Card } from '@/components/card'
 import { Section } from '@/components/section'
@@ -97,9 +96,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  // Serialize MDX content
-  const mdxSource = await serializeMDX(article.content)
-
   // Get related articles (same tags, excluding current)
   const { data: allArticles } = await getPublishedArticles({ pageSize: 10 })
   const relatedArticles = allArticles
@@ -178,7 +174,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <Section>
         <div className="container max-w-4xl">
           <Card className="p-8 md:p-12">
-            <MDXContent source={mdxSource} />
+            <MDXContent source={article.content} />
           </Card>
         </div>
       </Section>

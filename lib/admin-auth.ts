@@ -1,5 +1,6 @@
 import { createHash, timingSafeEqual } from 'node:crypto'
 import type { NextRequest } from 'next/server'
+import { readEnv } from './env'
 
 /**
  * Shared admin check for API routes.
@@ -9,7 +10,7 @@ import type { NextRequest } from 'next/server'
  * - Constant-time comparison (hash both sides so lengths always match).
  */
 export function isAdminRequest(request: NextRequest): boolean {
-    const expected = process.env.ADMIN_PASSWORD
+    const expected = readEnv('ADMIN_PASSWORD')
     if (!expected) return false
 
     const authHeader = request.headers.get('authorization')

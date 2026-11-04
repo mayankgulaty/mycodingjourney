@@ -38,16 +38,21 @@ export async function POST(request: NextRequest) {
         }
         const ext = extByType[file.type]
         const timestamp = Date.now()
-        const randomStr = Math.random().toString(36).substring(2, 8)
+        const randomStr = crypto.randomUUID().slice(0, 8)
         const filename = `cover-${timestamp}-${randomStr}.${ext}`
 
         // Convert file to buffer
         const arrayBuffer = await file.arrayBuffer()
         const buffer = new Uint8Array(arrayBuffer)
 
-        // Upload to Supabase Storage
+        // Upload to Supabase Storage.
+        // The app rejects files over 5 MB. A Workers request body on a Free or Pro
+        // zone is limited to 100 MB, so this check is the effective limit.
         const supabaseAdmin = createAdminClient()
-        const { data, error } = await supabaseAdmin.storage
+        if (!supabaseAdmin) {
+            return NextResponse.json({ error: 'Storage is not configured' }, { status: 500 })
+        }
+        const { error } = await supabaseAdmin.storage
             .from('blog-images')
             .upload(filename, buffer, {
                 contentType: file.type,
