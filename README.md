@@ -87,17 +87,7 @@ The design system is built with Tailwind CSS and custom CSS variables. Key files
 
 ## Deployment
 
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically
-
-### Other Platforms
-The project can be deployed to any platform that supports Next.js:
-- Netlify
-- AWS Amplify
-- Railway
-- DigitalOcean App Platform
+The site runs on Cloudflare Workers via `@opennextjs/cloudflare`. See [MIGRATION.md](MIGRATION.md) for secrets, the optional R2 cache binding, and the build commands.
 
 ## Technologies Used
 
@@ -107,7 +97,7 @@ The project can be deployed to any platform that supports Next.js:
 - **Animations**: Framer Motion
 - **Theme**: next-themes
 - **Content**: MDX
-- **Deployment**: Vercel
+- **Deployment**: Cloudflare Workers (`@opennextjs/cloudflare`)
 
 ## License
 
